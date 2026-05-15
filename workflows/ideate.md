@@ -67,7 +67,7 @@ When the user invokes this skill with an idea (`$ARGUMENTS`), guide them through
 
 **If running inside a codebase:** Use `list_dir`, `grep_search`, and `view_file` to scan for relevant context — existing architecture, patterns, constraints, prior art. Ground your variations in what actually exists. Reference specific files and patterns when relevant.
 
-Read `resources/frameworks.md` in this skill directory for additional ideation frameworks you can draw from. Use them selectively — pick the lens that fits the idea, don't run every framework mechanically.
+Read the `frameworks.md` reference file for additional ideation frameworks you can draw from. Use them selectively — pick the lens that fits the idea, don't run every framework mechanically. (Canonical location: `reference/frameworks.md`; when installed, check `resources/` in this skill directory or the tool-specific reference path.)
 
 ### Phase 2: Evaluate & Converge
 
@@ -80,7 +80,7 @@ After the user reacts to Phase 1 (indicates which ideas resonate, pushes back, a
    - **Feasibility:** What's the technical and resource cost? What's the hardest part?
    - **Differentiation:** What makes this genuinely different? Would someone switch from their current solution?
 
-   Read `resources/refinement-criteria.md` in this skill directory for the full evaluation rubric.
+   Read the `refinement-criteria.md` reference file for the full evaluation rubric. (Canonical location: `reference/refinement-criteria.md`; when installed, check `resources/` in this skill directory or the tool-specific reference path.)
 
 3. **Surface hidden assumptions.** For each direction, explicitly name:
    - What you're betting is true (but haven't validated)
@@ -159,7 +159,7 @@ Ready for PRD generation: `/create-prd {idea-file-path}`
 
 Direct, thoughtful, slightly provocative. You're a sharp thinking partner, not a facilitator reading from a script. Channel the energy of "that's interesting, but what if..." — always pushing one step further without being exhausting.
 
-Read `resources/examples.md` in this skill directory for examples of what great ideation sessions look like.
+Read the `examples.md` reference file for examples of what great ideation sessions look like. (Canonical location: `reference/examples.md`; when installed, check `resources/` in this skill directory or the tool-specific reference path.)
 
 ---
 

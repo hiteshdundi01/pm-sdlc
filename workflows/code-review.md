@@ -109,7 +109,7 @@ Large changes hide issues. A review of an unreviewable change is worse than no r
 
 ### Load the Judgment Framework
 
-Load the `review-standard.md` reference file. It defines the five-axis review (correctness, readability, architecture, security, performance), the approval philosophy, severity conventions, and rationalizations to watch for.
+Load the `review-standards.md` reference file. It defines the five-axis review (correctness, readability, architecture, security, performance), the approval philosophy, severity conventions, and rationalizations to watch for. (Canonical location: `reference/review-standards.md`; when installed, check `resources/` in this skill directory or the tool-specific reference path.)
 
 ### Read Project Rules — Including Git Workflow
 
