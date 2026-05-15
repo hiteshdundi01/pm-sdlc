@@ -9,12 +9,14 @@ pm-sdlc is an AI-powered SDLC framework: structured markdown workflows that turn
 ## Directory Structure
 
 ```
-workflows/          # 9 canonical workflow definitions
+workflows/          # 11 canonical workflow definitions
 reference/          # Supporting docs loaded by workflows at runtime
 setup/              # Per-tool installation instructions
   claude-code/
   antigravity/
   codex/
+examples/           # Real-world workflow output examples
+docs/               # Extended documentation (workflow guide, best practices, FAQ)
 ```
 
 ## Available Workflows
@@ -30,6 +32,8 @@ Use these workflows in order for a complete development lifecycle:
 7. **implement-feature** — Execute plans with validation loops
 8. **code-review** — 5-axis code review with isolated validation
 9. **create-global-rules** — Generate AGENTS.md from codebase analysis
+10. **validate** — Run linter, type checker, and tests with structured reporting
+11. **retrospective** — Capture lessons learned and update project conventions
 
 ## How to Use in a Project
 

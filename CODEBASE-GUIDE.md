@@ -15,7 +15,9 @@ ideate → create-prd → create-stories
                             ↓
               prime-for-feature → plan-feature ⇄ critique-plan
                                        ↓
-                              implement-feature → code-review
+                              implement-feature → validate → code-review
+                                                                ↓
+                                                          retrospective
 ```
 
 **create-global-rules** is a standalone workflow used once per project to bootstrap conventions.
@@ -64,6 +66,7 @@ Workflows produce artifacts in `.agents/` subdirectories (all gitignored):
 | `.agents/reviews/` | `code-review` | Review reports |
 | `.agents/reviews/plan-reviews/` | `critique-plan` | Plan audit reports |
 | `.agents/reports/` | `implement-feature` | Implementation reports |
+| `.agents/retros/` | `retrospective` | Retrospective reports + action items |
 
 ### External Integrations
 

@@ -80,6 +80,7 @@ setup_agents_dir() {
         ".agents/ideas/"
         ".agents/PRDs/"
         ".agents/reports/"
+        ".agents/retros/"
     )
 
     touch "$gitignore"
@@ -130,6 +131,8 @@ install_claude_code() {
     echo -e "  ${CYAN}/implement-feature${NC}  — Execute a plan"
     echo -e "  ${CYAN}/code-review${NC}        — Review code/PRs"
     echo -e "  ${CYAN}/create-global-rules${NC} — Generate AGENTS.md"
+    echo -e "  ${CYAN}/validate${NC}           — Run quality checks"
+    echo -e "  ${CYAN}/retrospective${NC}      — Capture lessons learned"
 }
 
 # Install for Antigravity (Gemini)
@@ -317,7 +320,8 @@ main() {
     echo ""
     echo -e "${BOLD}Workflow chain:${NC}"
     echo -e "  ideate → create-prd → create-stories → prime-for-feature"
-    echo -e "  → plan-feature ⇄ critique-plan → implement-feature → code-review"
+    echo -e "  → plan-feature ⇄ critique-plan → implement-feature → validate"
+    echo -e "  → code-review → retrospective"
     echo ""
 }
 

@@ -6,7 +6,8 @@ These are the canonical workflow definitions for pm-sdlc. Each file is a structu
 
 ```
 ideate → create-prd → create-stories → prime-for-feature
-→ plan-feature ⇄ critique-plan → implement-feature → code-review
+→ plan-feature ⇄ critique-plan → implement-feature → validate → code-review
+→ retrospective
 ```
 
 `create-global-rules` is standalone — use it once per project.
@@ -21,8 +22,10 @@ ideate → create-prd → create-stories → prime-for-feature
 | **prime-for-feature** | Jira issue, codebase | Context in memory | `plan-feature` |
 | **plan-feature** | Feature description, PRD, or Jira issue | `.agents/plans/*.plan.md` | `critique-plan` |
 | **critique-plan** | Plan file | `.agents/reviews/plan-reviews/*.review.md` | `implement-feature` |
-| **implement-feature** | Plan file | Code changes + `.agents/reports/*.md` | `code-review` |
-| **code-review** | PR number, file, or folder | `.agents/reviews/*.md` | Merge |
+| **implement-feature** | Plan file | Code changes + `.agents/reports/*.md` | `validate` |
+| **validate** | Optional `--fix` or `--scope` | Structured pass/fail report | `code-review` |
+| **code-review** | PR number, file, or folder | `.agents/reviews/*.md` | `retrospective` |
+| **retrospective** | Feature name or `--sprint` | `.agents/retros/*.md` + convention updates | Next feature |
 | **create-global-rules** | Codebase | `AGENTS.md` at project root | — |
 
 ## Reference Documents

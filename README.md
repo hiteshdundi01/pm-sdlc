@@ -2,7 +2,7 @@
 
 **Turn AI coding assistants into disciplined engineering partners.**
 
-pm-sdlc is a framework of 9 structured workflows that guide AI assistants through the complete software development lifecycle — from ideation to code review. No runtime, no dependencies, no build step. Just markdown files that make AI actually useful for serious engineering work.
+pm-sdlc is a framework of 11 structured workflows that guide AI assistants through the complete software development lifecycle — from ideation to code review to retrospective. No runtime, no dependencies, no build step. Just markdown files that make AI actually useful for serious engineering work.
 
 ## Why This Exists
 
@@ -27,7 +27,9 @@ Workflows are designed to be used in sequence. Each one's output feeds into the 
                           │
                   implement-feature
                           │
-                     code-review
+                     validate ──→ code-review
+                                      │
+                                retrospective
 ```
 
 `create-global-rules` runs standalone to bootstrap project conventions.
@@ -45,6 +47,8 @@ Workflows are designed to be used in sequence. Each one's output feeds into the 
 | 7 | **implement-feature** | Executes plans with validation loops | Hard E2E gate — can't report done until tests actually pass |
 | 8 | **code-review** | 5-axis PR review with isolated validation | Read-only safety via git worktrees; never touches your working tree |
 | 9 | **create-global-rules** | Generates AGENTS.md from codebase analysis | Discover-first: every rule comes from actual code, not assumptions |
+| 10 | **validate** | Runs linter, type checker, and tests | Auto-detects project toolchain; structured pass/fail report |
+| 11 | **retrospective** | Captures lessons learned after shipping | Every retro produces at least one concrete convention update |
 
 ## Quick Start
 
@@ -187,7 +191,7 @@ Workflows load these at runtime for domain-specific knowledge:
 | **frameworks.md** | 7 ideation frameworks: SCAMPER, How Might We, First Principles, Jobs to Be Done, Constraint-Based, Pre-mortem, Analogous Inspiration |
 | **refinement-criteria.md** | Evaluation rubric: User Value (painkiller vs vitamin), Feasibility, Differentiation + Assumption Audit framework |
 | **review-standards.md** | 5-axis review (Correctness, Readability, Architecture, Security, Performance) + severity conventions + rationalization anti-patterns |
-| **examples.md** | Example ideation session outputs (contribute yours!) |
+| **examples.md** | Real ideation session examples with analysis of what made them effective |
 
 ## Jira Integration
 
@@ -199,11 +203,30 @@ Workflows that integrate with Jira (via Atlassian MCP):
 
 Requires the [Atlassian MCP server](https://www.npmjs.com/package/@anthropic/atlassian-mcp-server) to be configured.
 
+## Examples
+
+The [`examples/`](examples/) directory contains realistic workflow outputs:
+
+| Example | Workflow | What It Shows |
+|---------|----------|---------------|
+| [Ideation Session](examples/ideation-session.md) | `ideate` | HMW framing, variations, stress testing, "Not Doing" list |
+| [Implementation Plan](examples/implementation-plan.md) | `plan-feature` | `file:line` citations, pattern table, ordered tasks |
+| [Plan Critique](examples/plan-critique.md) | `critique-plan` | 7-axis audit, minimum-viable diff, CUT/CHANGE/ADD |
+| [Code Review](examples/code-review-report.md) | `code-review` | 5-axis review, plan conformance, validation results |
+
+## Documentation
+
+| Document | Purpose |
+|----------|---------|
+| [Workflow Guide](docs/workflow-guide.md) | How each workflow connects — inputs, outputs, handoffs |
+| [Best Practices](docs/best-practices.md) | Tips, common pitfalls, effectiveness metrics |
+| [FAQ](docs/faq.md) | Common questions about installation, usage, and troubleshooting |
+
 ## Project Structure
 
 ```
 pm-sdlc/
-├── workflows/              # 9 canonical workflow definitions
+├── workflows/              # 11 canonical workflow definitions
 │   ├── ideate.md
 │   ├── create-prd.md
 │   ├── create-stories.md
@@ -212,16 +235,24 @@ pm-sdlc/
 │   ├── critique-plan.md
 │   ├── implement-feature.md
 │   ├── code-review.md
-│   └── create-global-rules.md
+│   ├── create-global-rules.md
+│   ├── validate.md
+│   └── retrospective.md
 ├── reference/              # Supporting documents loaded by workflows
 │   ├── frameworks.md
 │   ├── refinement-criteria.md
 │   ├── review-standards.md
 │   └── examples.md
+├── examples/               # Real-world workflow output examples
+├── docs/                   # Extended documentation
+│   ├── workflow-guide.md
+│   ├── best-practices.md
+│   └── faq.md
 ├── setup/                  # Per-tool installation guides
 │   ├── claude-code/
 │   ├── antigravity/
 │   └── codex/
+├── .github/workflows/      # CI: markdown lint, link check, install test
 ├── install.sh              # One-command setup for any project
 ├── AGENTS.md               # For Codex/generic AI agents
 ├── CLAUDE.md               # For Claude Code (project rules)
