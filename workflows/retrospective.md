@@ -303,7 +303,7 @@ For each confirmed "Must Do" action:
 
 ## Absolute Constraints
 
-1. **NEVER produce a retrospective with zero actions.** If everything went perfectly, find one thing to improve anyway — there's always something.
+1. **NEVER produce a retrospective with zero analysis.** If genuinely everything went well and no improvements are warranted, state this explicitly with evidence — don't manufacture actions for process theater.
 2. **NEVER make vague observations.** Every finding must have specific evidence from artifacts.
 3. **NEVER modify workflow files directly** — workflow improvements are proposed, not applied. They go through the contribution process.
 4. **NEVER skip Phase 1.** Impressions without evidence lead to wrong conclusions.

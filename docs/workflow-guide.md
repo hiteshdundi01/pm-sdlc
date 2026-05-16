@@ -209,7 +209,7 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 - Reads adjacent files to check integration
 - Runs build/type-check after EVERY task
 - Writes tests for all new code
-- Has a hard E2E gate — can't report done until E2E passes
+- Has an E2E verification gate — workflows require passing tests before reporting done (with documented exceptions for libraries, CLIs, and docs repos)
 - Archives completed plans to `.agents/plans/completed/`
 - Transitions Jira issues and adds implementation comments
 
@@ -267,7 +267,7 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 - Reviews actual artifacts, not impressions
 - Identifies patterns across features (not just one-off observations)
 - Does root cause analysis for problems
-- Every retro produces at least one concrete action
+- Every retro produces at least one concrete action (or an explicit, evidence-based "nothing to change" with justification)
 - Can apply convention updates (with user confirmation)
 
 **Feeds into**: Improved future workflow runs via updated conventions

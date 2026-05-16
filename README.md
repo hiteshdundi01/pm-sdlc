@@ -1,212 +1,270 @@
+<div align="center">
+
 # pm-sdlc
 
 **Turn AI coding assistants into disciplined engineering partners.**
 
-pm-sdlc is a framework of 11 structured workflows that guide AI assistants through the complete software development lifecycle — from ideation to code review to retrospective. No runtime, no dependencies, no build step. Just markdown files that make AI actually useful for serious engineering work.
+<img src="docs/assets/pm-sdlc-hero.svg" alt="pm-sdlc lifecycle overview" width="100%">
 
-## Why This Exists
+<p>
+  <kbd>11 workflows</kbd>
+  <kbd>markdown only</kbd>
+  <kbd>zero runtime dependencies</kbd>
+  <kbd>Claude Code</kbd>
+  <kbd>Antigravity</kbd>
+  <kbd>OpenAI Codex</kbd>
+</p>
 
-AI coding assistants are powerful but undisciplined. Without structure, they:
-- Generate plausible code that doesn't match your codebase patterns
-- Say "LGTM" to everything instead of pushing back on weak ideas  
-- Skip validation, invent APIs, and rubber-stamp reviews
-- Build what sounds good instead of what's actually needed
+<p>
+  <a href="#quick-start"><strong>Quick Start</strong></a> ·
+  <a href="#workflow-chain"><strong>Workflow Chain</strong></a> ·
+  <a href="#what-makes-this-different"><strong>Why It Works</strong></a> ·
+  <a href="#documentation"><strong>Docs</strong></a>
+</p>
 
-pm-sdlc fixes this by giving AI assistants **opinionated, battle-tested workflows** with built-in quality gates, anti-sycophancy guards, and codebase grounding requirements.
+</div>
 
-## The Workflow Chain
+> AI coding agents are fast. pm-sdlc makes them accountable.
 
-Workflows are designed to be used in sequence. Each one's output feeds into the next:
+pm-sdlc is an AI-powered SDLC framework: a set of structured markdown workflows that guide AI assistants from fuzzy idea to reviewed, validated implementation. There is no runtime, no package install, no build step. The workflows are plain markdown files with explicit gates, codebase-grounding rules, and anti-sycophancy constraints.
 
-```
-  ideate ──→ create-prd ──→ create-stories
-                                    │
-                    prime-for-feature
-                          │
-                    plan-feature ⇄ critique-plan
-                          │
-                  implement-feature
-                          │
-                     validate ──→ code-review
-                                      │
-                                retrospective
-```
-
-`create-global-rules` runs standalone to bootstrap project conventions.
-
-## Workflows
-
-| # | Workflow | What It Does | Key Feature |
-|---|----------|-------------|-------------|
-| 1 | **ideate** | Refines raw ideas through divergent/convergent thinking | SCAMPER, HMW, JTBD frameworks; explicit "Not Doing" list |
-| 2 | **create-prd** | Generates Product Requirements Documents | 15-section template with implementation phases |
-| 3 | **create-stories** | Breaks PRDs into actionable stories | Direct Jira integration via MCP — creates issues, links dependencies |
-| 4 | **prime-for-feature** | Loads codebase + task context | Reconciles Jira ACs against PRD, proposes updates |
-| 5 | **plan-feature** | Creates implementation plans grounded in actual code | Every pattern reference requires `file:line` citation from real code |
-| 6 | **critique-plan** | Audits plans for bloat and scope creep | Rationalization scanner: "for testability" → name the test |
-| 7 | **implement-feature** | Executes plans with validation loops | Hard E2E gate — can't report done until tests actually pass |
-| 8 | **code-review** | 5-axis PR review with isolated validation | Read-only safety via git worktrees; never touches your working tree |
-| 9 | **create-global-rules** | Generates AGENTS.md from codebase analysis | Discover-first: every rule comes from actual code, not assumptions |
-| 10 | **validate** | Runs linter, type checker, and tests | Auto-detects project toolchain; structured pass/fail report |
-| 11 | **retrospective** | Captures lessons learned after shipping | Every retro produces at least one concrete convention update |
+<table>
+  <tr>
+    <td width="33%">
+      <h3>Grounded in the real codebase</h3>
+      <p>Plans require <code>file:line</code> citations from actual source files, so assistants follow your architecture instead of inventing patterns.</p>
+    </td>
+    <td width="33%">
+      <h3>Designed to push back</h3>
+      <p>Workflows include critique phases, rationalization scanners, and explicit permission to challenge weak assumptions with specificity.</p>
+    </td>
+    <td width="33%">
+      <h3>Validation is part of the work</h3>
+      <p>Implementation, validation, and review workflows force type checks, tests, and concrete evidence before the agent can call work done.</p>
+    </td>
+  </tr>
+</table>
 
 ## Quick Start
 
-### Option 1: Install Script
+Clone once, then install the workflows into any project:
 
 ```bash
-# Clone the framework
 git clone https://github.com/hiteshdundi01/pm-sdlc.git
 cd pm-sdlc
 
-# Install into your project (interactive — picks your AI tool)
+# Interactive installer: choose Claude Code, Antigravity, Codex, or all.
 ./install.sh /path/to/your/project
 ```
 
-The install script will ask which tool you use and set up the right directory structure.
-
-### Option 2: Manual Setup
-
-<details>
-<summary><b>Claude Code</b></summary>
+Skip the prompt when you already know the target tool:
 
 ```bash
-# From your project root:
+./install.sh /path/to/your/project --tool codex
+./install.sh /path/to/your/project --tool claude-code
+./install.sh /path/to/your/project --tool antigravity
+./install.sh /path/to/your/project --tool all
+```
+
+| Tool | Installs To | How You Use It |
+| ---- | ----------- | -------------- |
+| Claude Code | `.claude/commands/` + `.claude/reference/` | Slash commands such as `/ideate`, `/plan-feature`, `/code-review` |
+| Antigravity | `.gemini/antigravity/skills/` | Auto-discovered skills, one workflow per skill directory |
+| OpenAI Codex | `.agents/workflows/` + `.agents/reference/` | Reference workflows from `AGENTS.md` or attach them as task context |
+
+<details>
+<summary><strong>Manual setup commands</strong></summary>
+
+### Claude Code
+
+```bash
 mkdir -p .claude/commands .claude/reference
 
-# Copy workflows (exclude the README)
 for f in /path/to/pm-sdlc/workflows/*.md; do
   [ "$(basename "$f")" = "README.md" ] && continue
   cp "$f" .claude/commands/
 done
 
-# Copy reference docs
 cp /path/to/pm-sdlc/reference/*.md .claude/reference/
-
-# Add to .gitignore
 echo '.agents/' >> .gitignore
 ```
 
-Then use workflows as slash commands: `/ideate`, `/plan-feature`, `/code-review`, etc.
-
-</details>
-
-<details>
-<summary><b>Antigravity (Gemini)</b></summary>
+### Antigravity
 
 ```bash
-# From your project root:
-SKILL_DIR=".gemini/antigravity/skills/pm-sdlc"
-mkdir -p "$SKILL_DIR/reference"
+SKILL_DIR=".gemini/antigravity/skills"
 
-# Copy workflows as individual skill files
 for f in /path/to/pm-sdlc/workflows/*.md; do
   name=$(basename "$f" .md)
-  skill_path="$SKILL_DIR/$name"
-  mkdir -p "$skill_path"
-  cp "$f" "$skill_path/SKILL.md"
+  [ "$name" = "README" ] && continue
+  mkdir -p "$SKILL_DIR/$name"
+  cp "$f" "$SKILL_DIR/$name/SKILL.md"
 done
 
-# Copy reference docs
-cp /path/to/pm-sdlc/reference/*.md "$SKILL_DIR/reference/"
+mkdir -p "$SKILL_DIR/ideate/resources"
+cp /path/to/pm-sdlc/reference/frameworks.md "$SKILL_DIR/ideate/resources/"
+cp /path/to/pm-sdlc/reference/refinement-criteria.md "$SKILL_DIR/ideate/resources/"
+cp /path/to/pm-sdlc/reference/examples.md "$SKILL_DIR/ideate/resources/"
 
-# Add to .gitignore
+mkdir -p "$SKILL_DIR/code-review/resources"
+cp /path/to/pm-sdlc/reference/review-standards.md "$SKILL_DIR/code-review/resources/"
+
 echo '.agents/' >> .gitignore
 ```
 
-</details>
-
-<details>
-<summary><b>OpenAI Codex</b></summary>
+### OpenAI Codex
 
 ```bash
-# From your project root:
 mkdir -p .agents/workflows .agents/reference
 
-# Copy workflows (exclude the README)
 for f in /path/to/pm-sdlc/workflows/*.md; do
   [ "$(basename "$f")" = "README.md" ] && continue
   cp "$f" .agents/workflows/
 done
 
-# Copy reference docs  
 cp /path/to/pm-sdlc/reference/*.md .agents/reference/
-
-# Copy AGENTS.md to project root
 cp /path/to/pm-sdlc/AGENTS.md ./
 
-# Add runtime artifacts to .gitignore
-echo '.agents/plans/' >> .gitignore
-echo '.agents/reviews/' >> .gitignore
-echo '.agents/stories/' >> .gitignore
-echo '.agents/ideas/' >> .gitignore
-echo '.agents/PRDs/' >> .gitignore
-echo '.agents/reports/' >> .gitignore
+cat >> .gitignore <<'EOF'
+.agents/plans/
+.agents/reviews/
+.agents/stories/
+.agents/ideas/
+.agents/PRDs/
+.agents/reports/
+.agents/retros/
+.agents/rules/
+EOF
 ```
 
-Reference workflows in your `AGENTS.md` or use them as context when prompting.
-
 </details>
+
+## Workflow Chain
+
+Use the workflows in sequence when you want a complete development lifecycle. Each output becomes the next workflow's input.
+
+```mermaid
+flowchart LR
+    subgraph discovery["Discovery"]
+        ideate["ideate"]
+        prd["create-prd"]
+        stories["create-stories"]
+        ideate --> prd --> stories
+    end
+
+    subgraph planning["Planning"]
+        prime["prime-for-feature"]
+        plan["plan-feature"]
+        critique["critique-plan"]
+        prime --> plan
+        plan <--> critique
+    end
+
+    subgraph execution["Execution"]
+        implement["implement-feature"]
+        validate["validate"]
+        review["code-review"]
+        implement --> validate --> review
+    end
+
+    subgraph learning["Learning"]
+        retro["retrospective"]
+    end
+
+    stories --> prime
+    critique --> implement
+    review --> retro
+
+    rules["create-global-rules<br/>standalone bootstrap"]
+
+    classDef discover fill:#e0f2fe,stroke:#0284c7,color:#082f49
+    classDef planClass fill:#dcfce7,stroke:#16a34a,color:#052e16
+    classDef execute fill:#fef3c7,stroke:#d97706,color:#451a03
+    classDef learn fill:#fce7f3,stroke:#db2777,color:#500724
+    classDef standalone fill:#e5e7eb,stroke:#64748b,color:#111827
+
+    class ideate,prd,stories discover
+    class prime,plan,critique planClass
+    class implement,validate,review execute
+    class retro learn
+    class rules standalone
+```
+
+`create-global-rules` runs standalone to bootstrap project conventions from an existing codebase.
+
+## Workflow Command Center
+
+| Phase | Workflow | Produces | Built-In Guardrail |
+| ----- | -------- | -------- | ------------------ |
+| Discover | `ideate` | `.agents/ideas/*.idea.md` | Divergent/convergent thinking, SCAMPER, HMW, JTBD, explicit "Not Doing" list |
+| Discover | `create-prd` | `.agents/PRDs/*.prd.md` | 15-section product spec with concrete implementation phases |
+| Discover | `create-stories` | `.agents/stories/*.md` and optional Jira issues | Human confirmation before creating Jira work |
+| Plan | `prime-for-feature` | Loaded project and task context | Reconciles Jira acceptance criteria against PRD context |
+| Plan | `plan-feature` | `.agents/plans/*.plan.md` | Every pattern reference requires a real `file:line` citation |
+| Plan | `critique-plan` | `.agents/reviews/plan-reviews/*.review.md` | Scope, YAGNI, sequencing, and rationalization audit |
+| Execute | `implement-feature` | Code changes + `.agents/reports/*.md` | Validation after each task and final E2E verification gate |
+| Execute | `validate` | Structured pass/fail report | Auto-detects project toolchain and reports exact failures |
+| Execute | `code-review` | `.agents/reviews/*.md` | 5-axis read-only review from an isolated git worktree |
+| Learn | `retrospective` | `.agents/retros/*.md` + convention updates | Requires at least one concrete lesson or convention update |
+| Bootstrap | `create-global-rules` | `AGENTS.md` | Discover-first rules from actual code, not assumptions |
 
 ## What Makes This Different
 
 ### Anti-Sycophancy by Design
 
-Most AI workflows produce "LGTM" responses. pm-sdlc workflows actively push back:
+Most AI workflows drift toward polite agreement. pm-sdlc makes challenge a first-class behavior:
 
-- **critique-plan** has a rationalization scanner that flags phrases like "for testability" and demands you name the actual test
-- **code-review** lists anti-patterns like "It works, that's good enough" with concrete rebuttals
-- **ideate** requires the AI to "push back on weak ideas with specificity and kindness"
+- `critique-plan` flags rationalizations like "for testability" and asks for the actual test.
+- `code-review` uses severity levels and a 5-axis review model instead of broad "LGTM" commentary.
+- `ideate` explicitly asks the agent to push back on weak ideas with specificity and kindness.
 
 ### Codebase Grounding
 
-Plans aren't generic — they're rooted in your actual code:
+Plans are not generic task lists. They are anchored in the project in front of the agent:
 
 ```markdown
 ### Patterns to Follow
 
-### Error Handling
-```typescript
-// SOURCE: src/services/client-service.ts:45-52
-try {
-  const result = await db.query(sql);
-  return { success: true, data: result };
-} catch (error) {
-  logger.error('Client query failed', { error: sanitize(error) });
-  throw new ServiceError('CLIENT_QUERY_FAILED', error);
-}
-```
+#### Error Handling
+
+SOURCE: src/services/client-service.ts:45-52
+
+Use the existing service-layer error wrapper and sanitized logging pattern
+before introducing new database calls.
 ```
 
-Every pattern reference in a plan must include a `file:line` citation from the actual codebase. No invented patterns.
+Every pattern reference in a plan must include a `file:line` citation from the actual codebase. No invented conventions, no vibes dressed up as architecture.
 
 ### Validation Gates
 
-Workflows don't trust that things work — they verify:
+The workflows do not trust that things work. They ask for proof:
 
-- `implement-feature` runs type checking, linting, and tests after **every single task**
-- `code-review` runs validation in an **isolated git worktree** to avoid contaminating your work
-- `create-stories` validates project and epic existence in Jira before creating issues
+- `implement-feature` runs validation after every implementation task.
+- `validate` reports lint, type-check, and test results in a structured pass/fail format.
+- `code-review` reviews from an isolated git worktree so the review cannot contaminate your local changes.
+- `retrospective` feeds lessons back into conventions so the next feature starts smarter.
 
 ## Reference Documents
 
-Workflows load these at runtime for domain-specific knowledge:
+Workflows load focused reference docs only when they need domain-specific guidance.
 
-| Document | Purpose |
-|----------|---------|
-| **frameworks.md** | 7 ideation frameworks: SCAMPER, How Might We, First Principles, Jobs to Be Done, Constraint-Based, Pre-mortem, Analogous Inspiration |
-| **refinement-criteria.md** | Evaluation rubric: User Value (painkiller vs vitamin), Feasibility, Differentiation + Assumption Audit framework |
-| **review-standards.md** | 5-axis review (Correctness, Readability, Architecture, Security, Performance) + severity conventions + rationalization anti-patterns |
-| **examples.md** | Real ideation session examples with analysis of what made them effective |
-| **tool-capabilities.md** | Maps capability language to Claude Code, Antigravity, and Codex tool APIs |
+| Document | Loaded By | Purpose |
+| -------- | --------- | ------- |
+| [`frameworks.md`](reference/frameworks.md) | `ideate` | 7 ideation frameworks: SCAMPER, HMW, First Principles, JTBD, Constraint-Based, Pre-mortem, Analogous Inspiration |
+| [`refinement-criteria.md`](reference/refinement-criteria.md) | `ideate` | Evaluation rubric for user value, feasibility, differentiation, and assumption audits |
+| [`examples.md`](reference/examples.md) | `ideate` | Real ideation examples with analysis of what made them effective |
+| [`review-standards.md`](reference/review-standards.md) | `code-review` | 5-axis review framework, severity conventions, and rationalization anti-patterns |
+| [`tool-capabilities.md`](reference/tool-capabilities.md) | Tool setup and workflow authors | Maps capability language to Claude Code, Antigravity, and Codex APIs |
 
 ## Jira Integration
 
-Workflows that integrate with Jira (via Atlassian MCP):
+Jira-aware workflows use Atlassian MCP when it is configured:
 
-- **create-stories** → Creates issues, sets priority/labels, links to epics, adds dependency links
-- **prime-for-feature** → Fetches issues, reconciles acceptance criteria against PRD
-- **implement-feature** → Transitions issues, adds implementation comments
+| Workflow | Jira Behavior |
+| -------- | ------------- |
+| `create-stories` | Creates issues, sets priority and labels, links to epics, and adds dependency links after user confirmation |
+| `prime-for-feature` | Fetches issues and reconciles acceptance criteria against PRD context |
+| `implement-feature` | Transitions issues and adds implementation comments |
 
 Requires the [Atlassian MCP server](https://www.npmjs.com/package/@anthropic/atlassian-mcp-server) to be configured.
 
@@ -215,8 +273,8 @@ Requires the [Atlassian MCP server](https://www.npmjs.com/package/@anthropic/atl
 The [`examples/`](examples/) directory contains realistic workflow outputs:
 
 | Example | Workflow | What It Shows |
-|---------|----------|---------------|
-| [Ideation Session](examples/ideation-session.md) | `ideate` | HMW framing, variations, stress testing, "Not Doing" list |
+| ------- | -------- | ------------- |
+| [Ideation Session](examples/ideation-session.md) | `ideate` | HMW framing, variations, stress testing, and a "Not Doing" list |
 | [Implementation Plan](examples/implementation-plan.md) | `plan-feature` | `file:line` citations, pattern table, ordered tasks |
 | [Plan Critique](examples/plan-critique.md) | `critique-plan` | 7-axis audit, minimum-viable diff, CUT/CHANGE/ADD |
 | [Code Review](examples/code-review-report.md) | `code-review` | 5-axis review, plan conformance, validation results |
@@ -224,51 +282,28 @@ The [`examples/`](examples/) directory contains realistic workflow outputs:
 ## Documentation
 
 | Document | Purpose |
-|----------|---------|
-| [Workflow Guide](docs/workflow-guide.md) | How each workflow connects — inputs, outputs, handoffs |
-| [Best Practices](docs/best-practices.md) | Tips, common pitfalls, effectiveness metrics |
+| -------- | ------- |
+| [Workflow Guide](docs/workflow-guide.md) | How each workflow connects: inputs, outputs, and handoffs |
+| [Best Practices](docs/best-practices.md) | Tips, common pitfalls, and effectiveness metrics |
 | [FAQ](docs/faq.md) | Common questions about installation, usage, and troubleshooting |
 
 ## Project Structure
 
-```
+```text
 pm-sdlc/
 ├── workflows/              # 11 canonical workflow definitions
-│   ├── ideate.md
-│   ├── create-prd.md
-│   ├── create-stories.md
-│   ├── prime-for-feature.md
-│   ├── plan-feature.md
-│   ├── critique-plan.md
-│   ├── implement-feature.md
-│   ├── code-review.md
-│   ├── create-global-rules.md
-│   ├── validate.md
-│   └── retrospective.md
-├── reference/              # Supporting documents loaded by workflows
-│   ├── frameworks.md
-│   ├── refinement-criteria.md
-│   ├── review-standards.md
-│   ├── examples.md
-│   └── tool-capabilities.md
-├── examples/               # Real-world workflow output examples
-├── docs/                   # Extended documentation
-│   ├── workflow-guide.md
-│   ├── best-practices.md
-│   └── faq.md
+├── reference/              # Supporting docs loaded by workflows
 ├── setup/                  # Per-tool installation guides
-│   ├── claude-code/
-│   ├── antigravity/
-│   └── codex/
-├── .github/workflows/      # CI: markdown lint, link check, install test, workflow check
+├── examples/               # Real workflow output examples
+├── docs/                   # Extended documentation and README assets
+│   └── assets/
 ├── scripts/                # CI scripts
-│   └── check-workflows.sh  # Validates workflow structure and tool-agnostic compliance
+│   └── check-workflows.sh
 ├── install.sh              # One-command setup for any project
-├── AGENTS.md               # For Codex/generic AI agents
-├── CLAUDE.md               # For Claude Code (project rules)
+├── AGENTS.md               # Codex and generic AI-agent instructions
+├── CLAUDE.md               # Claude Code project rules
 ├── CODEBASE-GUIDE.md       # Architecture guide for contributors
-├── CONTRIBUTING.md         # How to contribute
-├── CHANGELOG.md            # Version history
+├── CONTRIBUTING.md         # Contribution guide
 └── LICENSE                 # MIT
 ```
 
@@ -278,9 +313,9 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). The short version:
 
 1. Fork and branch from `main`
 2. Follow the [workflow file conventions](CONTRIBUTING.md#workflow-file-structure)
-3. Test against a real codebase
+3. Test workflow changes against a real codebase
 4. Open a PR with a clear description
 
 ## License
 
-MIT — see [LICENSE](LICENSE).
+MIT. See [LICENSE](LICENSE).

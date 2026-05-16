@@ -38,6 +38,8 @@ cat >> .gitignore << 'EOF'
 .agents/ideas/
 .agents/PRDs/
 .agents/reports/
+.agents/retros/
+.agents/rules/
 EOF
 ```
 

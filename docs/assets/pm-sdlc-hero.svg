@@ -1,0 +1,96 @@
+<svg width="1200" height="560" viewBox="0 0 1200 560" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">pm-sdlc lifecycle overview</title>
+  <desc id="desc">A visual overview of the pm-sdlc workflow chain from discovery to planning, execution, and learning.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1200" y2="560" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#07111F"/>
+      <stop offset="0.48" stop-color="#0F172A"/>
+      <stop offset="1" stop-color="#111827"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="88" y1="0" x2="1112" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#38BDF8"/>
+      <stop offset="0.34" stop-color="#34D399"/>
+      <stop offset="0.68" stop-color="#F59E0B"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+    <linearGradient id="cardEdge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity="0.28"/>
+      <stop offset="1" stop-color="#FFFFFF" stop-opacity="0.08"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="20" stdDeviation="22" flood-color="#020617" flood-opacity="0.35"/>
+    </filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" stroke="#94A3B8" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="1200" height="560" rx="34" fill="url(#background)"/>
+  <rect width="1200" height="560" rx="34" fill="url(#grid)"/>
+  <path d="M88 202 C210 132 332 273 454 205 C588 130 712 123 846 198 C954 259 1041 216 1112 156" stroke="url(#accent)" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <path d="M88 204 C210 134 332 275 454 207 C588 132 712 125 846 200 C954 261 1041 218 1112 158" stroke="url(#accent)" stroke-width="18" stroke-linecap="round" opacity="0.08"/>
+
+  <text x="76" y="104" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="64" font-weight="800" letter-spacing="0">pm-sdlc</text>
+  <text x="80" y="147" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="22" font-weight="500">Structured workflows for disciplined AI engineering</text>
+  <text x="80" y="184" fill="#94A3B8" font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif" font-size="16">No runtime. No dependencies. Just markdown prompts with gates, grounding, and validation.</text>
+
+  <g filter="url(#softShadow)">
+    <rect x="774" y="72" width="120" height="86" rx="18" fill="#0B1220" stroke="url(#cardEdge)"/>
+    <text x="834" y="109" text-anchor="middle" fill="#38BDF8" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="30" font-weight="800">11</text>
+    <text x="834" y="134" text-anchor="middle" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="650">workflows</text>
+
+    <rect x="914" y="72" width="120" height="86" rx="18" fill="#0B1220" stroke="url(#cardEdge)"/>
+    <text x="974" y="109" text-anchor="middle" fill="#34D399" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="30" font-weight="800">5</text>
+    <text x="974" y="134" text-anchor="middle" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="650">review axes</text>
+
+    <rect x="1054" y="72" width="88" height="86" rx="18" fill="#0B1220" stroke="url(#cardEdge)"/>
+    <text x="1098" y="109" text-anchor="middle" fill="#F59E0B" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="30" font-weight="800">0</text>
+    <text x="1098" y="134" text-anchor="middle" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="650">runtime</text>
+  </g>
+
+  <g transform="translate(64 268)" filter="url(#softShadow)">
+    <rect width="244" height="174" rx="22" fill="#0B1220" stroke="#38BDF8" stroke-opacity="0.45"/>
+    <rect x="20" y="22" width="66" height="8" rx="4" fill="#38BDF8"/>
+    <text x="20" y="62" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="800">Discover</text>
+    <text x="20" y="92" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">ideate</text>
+    <text x="20" y="119" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">create-prd</text>
+    <text x="20" y="146" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">create-stories</text>
+  </g>
+
+  <g transform="translate(338 268)" filter="url(#softShadow)">
+    <rect width="244" height="174" rx="22" fill="#0B1220" stroke="#34D399" stroke-opacity="0.45"/>
+    <rect x="20" y="22" width="66" height="8" rx="4" fill="#34D399"/>
+    <text x="20" y="62" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="800">Plan</text>
+    <text x="20" y="92" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">prime-for-feature</text>
+    <text x="20" y="119" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">plan-feature</text>
+    <text x="20" y="146" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">critique-plan</text>
+  </g>
+
+  <g transform="translate(612 268)" filter="url(#softShadow)">
+    <rect width="244" height="174" rx="22" fill="#0B1220" stroke="#F59E0B" stroke-opacity="0.5"/>
+    <rect x="20" y="22" width="66" height="8" rx="4" fill="#F59E0B"/>
+    <text x="20" y="62" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="800">Execute</text>
+    <text x="20" y="92" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">implement-feature</text>
+    <text x="20" y="119" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">validate</text>
+    <text x="20" y="146" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">code-review</text>
+  </g>
+
+  <g transform="translate(886 268)" filter="url(#softShadow)">
+    <rect width="244" height="174" rx="22" fill="#0B1220" stroke="#F472B6" stroke-opacity="0.5"/>
+    <rect x="20" y="22" width="66" height="8" rx="4" fill="#F472B6"/>
+    <text x="20" y="62" fill="#F8FAFC" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="24" font-weight="800">Learn</text>
+    <text x="20" y="92" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">retrospective</text>
+    <text x="20" y="119" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">create-global-rules</text>
+    <text x="20" y="146" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="15">conventions update</text>
+  </g>
+
+  <path d="M310 356 H330" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2"/>
+  <path d="M330 356 L321 348 M330 356 L321 364" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round"/>
+  <path d="M584 356 H604" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2"/>
+  <path d="M604 356 L595 348 M604 356 L595 364" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round"/>
+  <path d="M858 356 H878" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2"/>
+  <path d="M878 356 L869 348 M878 356 L869 364" stroke="#94A3B8" stroke-opacity="0.65" stroke-width="2" stroke-linecap="round"/>
+
+  <rect x="80" y="484" width="1040" height="34" rx="17" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.1"/>
+  <text x="600" y="506" text-anchor="middle" fill="#CBD5E1" font-family="Inter, ui-sans-serif, system-ui, sans-serif" font-size="14" font-weight="600">A prompt framework that asks agents to discover, cite, validate, review, and remember.</text>
+</svg>

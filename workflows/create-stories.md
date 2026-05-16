@@ -6,7 +6,7 @@ argument-hint: <path-to-prd> [--project PROJECT_KEY] [--epic EPIC_KEY]
 
 # Create Jira Stories from PRD
 
-Generate structured user stories from a Product Requirements Document. When Jira MCP is configured, automatically creates the stories in Jira.
+Generate structured user stories from a Product Requirements Document. When Jira MCP is configured, creates the stories in Jira after user confirmation.
 
 ## When to use this skill
 - The user asks to generate user stories from a PRD.

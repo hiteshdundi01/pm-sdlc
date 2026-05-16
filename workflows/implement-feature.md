@@ -147,7 +147,7 @@ Re-read the plan and find the Acceptance Criteria and any end-to-end testing sec
 
 If the plan has no explicit E2E tests, perform a basic smoke test: start the app, exercise the new/changed feature, verify it works.
 
-**This is a hard gate.** Static checks and unit tests alone are never sufficient.
+**This is a hard gate for projects with runnable applications.** For libraries, CLIs, docs-only repos, or infrastructure scripts without a running application, substitute comprehensive integration tests or manual verification against the acceptance criteria. Document the rationale for any substitution.
 
 ---
 
@@ -318,7 +318,7 @@ After all phases complete, provide a concise summary:
 
 1. **NEVER skip validation after a task** — run the build/type-check after every single task.
 2. **NEVER proceed past a failing check** — fix the failure before moving to the next task.
-3. **NEVER skip the E2E gate** — static checks and unit tests alone are never sufficient.
+3. **NEVER skip the E2E gate for runnable applications** — for libraries, CLIs, or docs repos, substitute integration tests and document the rationale.
 4. **NEVER create a report claiming success if any check fails** — the report must reflect reality.
 5. **ALWAYS archive the plan** to `.agents/plans/completed/` after successful implementation.
 6. **Use capability language for Jira operations** — see `reference/tool-capabilities.md` for tool-specific API names.

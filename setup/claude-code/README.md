@@ -61,4 +61,4 @@ Workflows reference documents in `.claude/reference/`:
 - `ideate` loads `frameworks.md`, `refinement-criteria.md`, and `examples.md`
 - `code-review` loads `review-standards.md`
 
-These are loaded at runtime using `view_file` — no special configuration needed.
+These are loaded at runtime when the workflow needs them — no special configuration needed.

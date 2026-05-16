@@ -217,5 +217,5 @@ After creating the plan file, provide a concise summary in your response:
 
 - **Jira**: If a Jira issue key is available, fetch it for context. Include the key in plan metadata so downstream workflows can update issue status.
 - **PRDs**: Plans can be generated from PRD phases stored in `.agents/PRDs/`.
-- **Knowledge Base**: Check `~/.gemini/antigravity/knowledge/` for project-specific context (startup scripts, service architecture, known gotchas) before planning.
+- **Knowledge Base**: If your environment provides a persistent knowledge store (e.g., knowledge items, memory, or context files), check it for project-specific context (startup scripts, service architecture, known gotchas) before planning. See `reference/tool-capabilities.md` for your environment's specifics.
 - **Existing Skills**: Reference other `.agents/skills/` files for layer-specific implementation guidance when relevant.

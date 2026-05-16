@@ -10,7 +10,7 @@ pm-sdlc is a collection of structured markdown workflows that guide AI coding as
 
 It's structured prompt engineering with three key differences:
 1. **Workflows are sequenced** — each one's output feeds into the next
-2. **Quality gates are enforced** — workflows won't proceed without meeting conditions
+2. **Quality gates are built in** — workflows define conditions that must be met before proceeding
 3. **Codebase grounding is required** — plans must cite actual code, not invented patterns
 
 ### Do I need to use all 11 workflows?

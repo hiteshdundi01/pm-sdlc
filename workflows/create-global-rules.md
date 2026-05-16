@@ -198,7 +198,7 @@ After creating the file, provide a concise summary:
 
 ## Integration Points
 
-- **Knowledge Base**: Check `~/.gemini/antigravity/knowledge/` for existing project-specific context (startup scripts, service architecture, known gotchas) and incorporate relevant details.
+- **Knowledge Base**: If your environment provides a persistent knowledge store (e.g., knowledge items, memory, or context files), check it for existing project-specific context (startup scripts, service architecture, known gotchas) and incorporate relevant details. See `reference/tool-capabilities.md` for your environment's specifics.
 - **Existing Convention Files**: If `CONTRIBUTING.md`, `ARCHITECTURE.md`, or similar docs exist, reference them in the "On-Demand Context" section rather than duplicating their content.
 - **Workspace Skills**: If `.agents/skills/` exists with workspace-specific skills, mention them in AGENTS.md so agents know to check there.
 - **PRDs**: If `.agents/PRDs/` exists, mention it as context for understanding project direction.

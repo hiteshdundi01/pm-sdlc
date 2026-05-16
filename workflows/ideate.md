@@ -205,7 +205,7 @@ After completing an ideation session:
 
 - **Downstream → PRD**: The `.idea.md` output is designed as direct input to `/create-prd`. The problem statement, target user, MVP scope, and assumptions map to PRD sections.
 - **Codebase Context**: When invoked inside a project, scan the project structure, search for patterns, and read key files to ground ideas in existing architecture.
-- **Knowledge Base**: Check `~/.gemini/antigravity/knowledge/` for project-specific context before ideating.
+- **Knowledge Base**: If your environment provides a persistent knowledge store (e.g., knowledge items, memory, or context files), check it for project-specific context before ideating. See `reference/tool-capabilities.md` for your environment's specifics.
 - **Jira**: If the idea relates to an existing Jira issue, fetch it for context. See `reference/tool-capabilities.md` for your environment's Jira API.
 
 ## Absolute Constraints
