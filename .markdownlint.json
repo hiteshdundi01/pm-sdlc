@@ -6,5 +6,10 @@
   },
   "no-inline-html": false,
   "no-emphasis-as-heading": false,
-  "first-line-heading": false
+  "first-line-heading": false,
+  "blanks-around-headings": false,
+  "no-trailing-punctuation": false,
+  "blanks-around-fences": false,
+  "blanks-around-lists": false,
+  "table-column-style": false
 }
