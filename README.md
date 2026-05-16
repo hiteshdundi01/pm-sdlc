@@ -297,8 +297,6 @@ pm-sdlc/
 ├── examples/               # Real workflow output examples
 ├── docs/                   # Extended documentation and README assets
 │   └── assets/
-├── scripts/                # CI scripts
-│   └── check-workflows.sh
 ├── install.sh              # One-command setup for any project
 ├── AGENTS.md               # Codex and generic AI-agent instructions
 ├── CLAUDE.md               # Claude Code project rules

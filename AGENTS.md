@@ -61,5 +61,4 @@ When installed into a project (via `install.sh`), workflows live in the tool-spe
 | `reference/refinement-criteria.md` | Evaluation rubric for stress-testing ideas |
 | `reference/review-standards.md` | 5-axis review framework and severity levels |
 | `reference/tool-capabilities.md` | Maps capability language to tool-specific APIs |
-| `scripts/check-workflows.sh` | CI script validating workflow structure |
 | `install.sh` | Setup script for installing into projects |

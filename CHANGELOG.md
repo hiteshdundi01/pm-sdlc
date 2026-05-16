@@ -26,7 +26,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Install script** (`install.sh`) for one-command project setup
 - **Real-world examples**: ideation session, implementation plan, plan critique, code review report
 - **Documentation**: workflow guide, best practices, FAQ
-- **CI pipeline**: GitHub Actions for markdown linting, link checking, and install script verification
 - Open-source packaging: README, LICENSE (MIT), CONTRIBUTING guide
 
 ## [0.1.0] - 2026-05-14
