@@ -266,7 +266,7 @@ Jira-aware workflows use Atlassian MCP when it is configured:
 | `prime-for-feature` | Fetches issues and reconciles acceptance criteria against PRD context |
 | `implement-feature` | Transitions issues and adds implementation comments |
 
-Requires the [Atlassian MCP server](https://www.npmjs.com/package/@anthropic/atlassian-mcp-server) to be configured.
+Requires the [Atlassian MCP server](https://www.npmjs.com/package/@atlassian/mcp-server) to be configured.
 
 ## Examples
 
