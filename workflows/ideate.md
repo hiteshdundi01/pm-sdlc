@@ -65,7 +65,7 @@ When the user invokes this skill with an idea (`$ARGUMENTS`), guide them through
 
    Push beyond what the user initially asked for. Create products people don't know they need yet.
 
-**If running inside a codebase:** Use `list_dir`, `grep_search`, and `view_file` to scan for relevant context — existing architecture, patterns, constraints, prior art. Ground your variations in what actually exists. Reference specific files and patterns when relevant.
+**If running inside a codebase:** Scan the project for relevant context — list directories, search for patterns, and read key files to understand existing architecture, constraints, and prior art. Ground your variations in what actually exists. Reference specific files and patterns when relevant.
 
 Read the `frameworks.md` reference file for additional ideation frameworks you can draw from. Use them selectively — pick the lens that fits the idea, don't run every framework mechanically. (Canonical location: `reference/frameworks.md`; when installed, check `resources/` in this skill directory or the tool-specific reference path.)
 
@@ -204,9 +204,9 @@ After completing an ideation session:
 ## Integration Points
 
 - **Downstream → PRD**: The `.idea.md` output is designed as direct input to `/create-prd`. The problem statement, target user, MVP scope, and assumptions map to PRD sections.
-- **Codebase Context**: When invoked inside a project, use `list_dir`, `grep_search`, and `view_file` to ground ideas in existing architecture.
+- **Codebase Context**: When invoked inside a project, scan the project structure, search for patterns, and read key files to ground ideas in existing architecture.
 - **Knowledge Base**: Check `~/.gemini/antigravity/knowledge/` for project-specific context before ideating.
-- **Jira**: If the idea relates to an existing Jira issue, fetch it via `mcp_atlassian-mcp-server_getJiraIssue` for context.
+- **Jira**: If the idea relates to an existing Jira issue, fetch it for context. See `reference/tool-capabilities.md` for your environment's Jira API.
 
 ## Absolute Constraints
 

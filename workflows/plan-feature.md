@@ -24,9 +24,9 @@ Determine what the user provided and extract the feature understanding:
 
 | Input | Action |
 |-------|--------|
-| `.prd.md` file path | Read the PRD with `view_file`, extract the next pending phase |
-| Other `.md` file path | Read with `view_file`, extract feature description |
-| Jira issue key (e.g., `ANP0-5`) | Fetch via `mcp_atlassian-mcp-server_getJiraIssue` with `responseContentFormat: "markdown"` |
+| `.prd.md` file path | Read the PRD file, extract the next pending phase |
+| Other `.md` file path | Read the file, extract feature description |
+| Jira issue key (e.g., `ANP0-5`) | Fetch the Jira issue (with markdown content format). See `reference/tool-capabilities.md` for your environment's Jira API. |
 | Free-form text | Use directly as feature input |
 | Blank / no argument | Use conversation context and active document state |
 
@@ -42,7 +42,7 @@ Extract and document:
 
 ### Phase 2: EXPLORE — Study the Codebase
 
-This is the most important phase. Use `list_dir`, `view_file`, and `grep_search` to find:
+This is the most important phase. Explore the codebase to find:
 
 1. **Similar implementations** — analogous features with `file:line` references
 2. **Naming conventions** — actual variable, function, file naming examples from the codebase

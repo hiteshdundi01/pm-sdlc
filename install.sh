@@ -81,6 +81,7 @@ setup_agents_dir() {
         ".agents/PRDs/"
         ".agents/reports/"
         ".agents/retros/"
+        ".agents/rules/"
     )
 
     touch "$gitignore"
@@ -269,6 +270,10 @@ main() {
     while [[ $# -gt 0 ]]; do
         case "$1" in
             --tool)
+                if [ -z "${2:-}" ]; then
+                    print_error "--tool requires a value. One of: claude-code, antigravity, codex, all"
+                    exit 1
+                fi
                 tool="$2"
                 shift 2
                 ;;

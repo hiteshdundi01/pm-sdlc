@@ -26,7 +26,7 @@ Executes a `.plan.md` file produced by the `plan-feature` skill. Every change is
 
 ### Phase 1: LOAD — Read and Parse the Plan
 
-Load the plan file with `view_file` and extract:
+Read the plan file and extract:
 
 - **Summary** — What we're building
 - **Patterns to Mirror** — Code to copy from
@@ -220,33 +220,29 @@ mv {plan-path} .agents/plans/completed/
 
 #### 6.1 Resolve Cloud ID
 
-Call `mcp_atlassian-mcp-server_getAccessibleAtlassianResources` to get the `cloudId`.
+Resolve the Jira Cloud ID via the accessible-resources API.
 
 #### 6.2 Transition the Issue
 
-1. Call `mcp_atlassian-mcp-server_getTransitionsForJiraIssue` with `cloudId` and `issueIdOrKey` to get available transitions — each transition has a numeric `id` and a `name`
+1. Fetch available transitions for the issue — each transition has a numeric `id` and a `name`
 2. Find the most appropriate transition (prefer "In Review" or "In Progress"; fall back to "Done" if no review state exists)
-3. Call `mcp_atlassian-mcp-server_transitionJiraIssue` with:
-   - `cloudId`: The Cloud ID
-   - `issueIdOrKey`: The issue key
-   - `transition`: `{ "id": "{transition_id}" }` — use the numeric ID from step 1, NOT the status name
+3. Transition the issue using the numeric transition ID, NOT the status name
 
 #### 6.3 Add Implementation Comment
 
-Call `mcp_atlassian-mcp-server_addCommentToJiraIssue` with:
-- `issueIdOrKey`: The Jira issue key from the plan
-- `contentFormat`: `"markdown"`
-- `commentBody`: A summary including:
-  - What was implemented
-  - Branch name
-  - Files created/updated (count)
-  - Tests written (count)
-  - Any deviations from the plan
-  - Link to the implementation report file path
+Add a comment to the Jira issue (using markdown content format) with:
+- What was implemented
+- Branch name
+- Files created/updated (count)
+- Tests written (count)
+- Any deviations from the plan
+- Link to the implementation report file path
 
 #### 6.4 Update Issue Description (if needed)
 
-If the implementation resulted in meaningful deviations from the original issue description, call `mcp_atlassian-mcp-server_editJiraIssue` to update the description with the current state.
+If the implementation resulted in meaningful deviations from the original issue description, update the issue description with the current state.
+
+See `reference/tool-capabilities.md` for your environment's specific Jira API tool names.
 
 ---
 
@@ -315,5 +311,14 @@ After all phases complete, provide a concise summary:
 
 - **plan-feature**: This skill consumes plans produced by the `plan-feature` skill. The plan's structure (Tasks, Validation, Metadata) is the contract between them.
 - **Jira**: If a Jira issue key is present in the plan metadata, Phase 6 transitions the issue and adds an implementation comment.
-- **Knowledge Base**: Check `~/.gemini/antigravity/knowledge/` for project-specific context (startup scripts, service architecture, known gotchas) before executing.
+- **Knowledge Base**: Check for project-specific context (startup scripts, service architecture, known gotchas) before executing.
 - **Git**: This skill manages branch creation and expects a clean git state to start.
+
+## Absolute Constraints
+
+1. **NEVER skip validation after a task** — run the build/type-check after every single task.
+2. **NEVER proceed past a failing check** — fix the failure before moving to the next task.
+3. **NEVER skip the E2E gate** — static checks and unit tests alone are never sufficient.
+4. **NEVER create a report claiming success if any check fails** — the report must reflect reality.
+5. **ALWAYS archive the plan** to `.agents/plans/completed/` after successful implementation.
+6. **Use capability language for Jira operations** — see `reference/tool-capabilities.md` for tool-specific API names.

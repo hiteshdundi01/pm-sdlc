@@ -52,9 +52,14 @@ Workflows load reference documents at runtime for domain-specific knowledge:
 | `review-standards.md` | `code-review` | 5-axis review framework and severity conventions |
 | `examples.md` | `ideate` | Example ideation session outputs |
 
-### Runtime Artifacts
+### The `.agents/` Directory
 
-Workflows produce artifacts in `.agents/` subdirectories (all gitignored):
+For Codex installations, `.agents/` contains both **installed source files** and **runtime artifacts**:
+
+- **`.agents/workflows/`** and **`.agents/reference/`** — canonical workflow and reference files installed by the setup script. These are *tracked* (committed to the repo).
+- **All other `.agents/` subdirectories** — runtime artifacts produced by workflows during execution. These are *gitignored*.
+
+Runtime artifact directories (all gitignored):
 
 | Directory | Produced By | Contains |
 |-----------|-------------|----------|

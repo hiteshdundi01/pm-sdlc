@@ -11,7 +11,7 @@ Check if `prime-for-feature` has been run first. This skill expects Jira issues,
 
 This skill does not edit Jira. AC reconciliation belongs to `prime-for-feature`.
 
-## Use when
+## When to use this skill
 
 - The user asks to critique, review, audit, or sanity-check a plan.
 - A `.plan.md` path is given and the user wants a second pass before coding.
@@ -21,7 +21,7 @@ This skill does not edit Jira. AC reconciliation belongs to `prime-for-feature`.
 ### 1. Load
 
 - Verify priming. If Jira / conventions / patterns are missing from context, stop and ask the user to prime.
-- Read the plan (`view_file`). If no path given, list `.agents/plans/` and disambiguate.
+- Read the plan. If no path given, list `.agents/plans/` and disambiguate.
 - Sample 2-3 `file:line` citations from the plan's pattern table and view those exact ranges. This is the only fresh disk read; it is required. If a citation does not resolve, that is a `blocking` Pattern Fidelity finding.
 
 ### 2. Anchor + Sketch Minimum
@@ -101,7 +101,7 @@ If a critique already exists at the path, confirm overwrite first.
 
 In chat: file path, one-line verdict, blocking/minor counts, strongest aspect, CUT/CHANGE/ADD item counts, next step.
 
-## Constraints
+## Absolute Constraints
 
 - No plan rewriting. No format changes. No splitting into more files.
 - No re-fetching primed context. Ask to re-prime if missing.

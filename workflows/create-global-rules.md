@@ -52,7 +52,7 @@ Read root configuration files to extract tech stack and project metadata:
 
 #### 1.3 Map Directory Structure
 
-Use `list_dir` recursively (1-2 levels deep) to understand the codebase layout:
+List the directory tree recursively (1–2 levels deep) to understand the codebase layout:
 
 - Where does source code live?
 - Where are tests? (co-located, separate `tests/` dir, `__tests__/`)
@@ -130,7 +130,7 @@ Look for a template file at `.agents/AGENTS-template.md` in the workspace. If fo
 
 #### 3.3 Write the File
 
-Create `AGENTS.md` at the workspace root using `write_to_file`.
+Create `AGENTS.md` at the workspace root.
 
 **Adapt to the project:**
 - Remove sections that don't apply (e.g., no "Database" section if there's no DB)

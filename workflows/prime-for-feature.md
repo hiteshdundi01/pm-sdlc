@@ -20,14 +20,16 @@ This skill instructs the agent to build a comprehensive, workspace-aware underst
 
 If the user provides Jira issue keys (e.g., `ANP0-5`) or Confluence page IDs:
 
-1. Call `mcp_atlassian-mcp-server_getAccessibleAtlassianResources` to get the `cloudId`.
+1. Resolve the Jira Cloud ID via the accessible-resources API.
 2. **If Jira issues are provided:**
-   - For each issue key, call `mcp_atlassian-mcp-server_getJiraIssue` with `responseContentFormat: "markdown"` to fetch the issue summary, description, acceptance criteria, comments, and any other relevant context.
+   - For each issue key, fetch the Jira issue (with markdown content format) to get the summary, description, acceptance criteria, comments, and any other relevant context.
    - Check for linked issues (parent epics, blockers, related stories) to understand dependencies.
    - Use this context to inform your understanding of what work is expected.
 3. **If Confluence page IDs are provided:**
-   - For each page ID, call `mcp_atlassian-mcp-server_getConfluencePage` with `contentFormat: "markdown"` to fetch the page content.
+   - For each page ID, fetch the Confluence page content (with markdown format).
    - Use this context as additional background for understanding the project requirements or architecture.
+
+See `reference/tool-capabilities.md` for your environment's specific Jira/Confluence API tool names.
 
 ### Step 1: Discover Project Conventions
 
@@ -67,7 +69,7 @@ If Step 0 loaded one or more Jira issues **and** the project has a PRD (typicall
    - Which issue(s) need AC updates.
    - The specific ACs to add, remove, or revise, with rationale tied to PRD sections.
    - Ask the user for confirmation before making any changes.
-5. **Apply updates (on confirmation)** — if the user approves, call `mcp_atlassian-mcp-server_editJiraIssue` to update the issue description with the revised acceptance criteria. Preserve all other description content; only modify the AC section.
+5. **Apply updates (on confirmation)** — if the user approves, update the Jira issue description with the revised acceptance criteria. Preserve all other description content; only modify the AC section. See `reference/tool-capabilities.md` for your environment's Jira edit API.
 
 ## Output
 
@@ -86,3 +88,10 @@ Produce a scannable summary for the user of what you learned:
 - **AC Reconciliation** *(if Jira + PRD were both loaded)*: Summary of any gaps found between the PRD and current Jira ACs, with proposed updates (or confirmation that ACs are aligned)
 
 Format the output using bullet points and keep it concise.
+
+## Absolute Constraints
+
+1. **NEVER modify Jira issues without user confirmation** — always present proposed changes and ask first.
+2. **NEVER skip convention discovery** — always check for AGENTS.md, CLAUDE.md, CONTRIBUTING.md before proceeding.
+3. **NEVER assume codebase patterns** — discover them from actual files, not generic assumptions.
+4. **Use capability language for Jira operations** — see `reference/tool-capabilities.md` for tool-specific API names.

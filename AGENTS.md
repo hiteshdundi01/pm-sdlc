@@ -46,7 +46,8 @@ When installed into a project (via `install.sh`), workflows live in the tool-spe
 
 ## Conventions
 
-- Workflow outputs go in `.agents/` subdirectories (gitignored)
+- Workflow *runtime outputs* go in `.agents/` subdirectories (plans, reviews, reports, retros, rules — all gitignored)
+- For Codex installs, `.agents/workflows/` and `.agents/reference/` contain installed source and *are* tracked
 - Plans require `file:line` citations from the actual codebase
 - Reviews are read-only — never modify the working tree during review
 - All workflows have "Absolute Constraints" sections — respect them
@@ -59,4 +60,6 @@ When installed into a project (via `install.sh`), workflows live in the tool-spe
 | `reference/frameworks.md` | 7 ideation frameworks (SCAMPER, HMW, JTBD, etc.) |
 | `reference/refinement-criteria.md` | Evaluation rubric for stress-testing ideas |
 | `reference/review-standards.md` | 5-axis review framework and severity levels |
+| `reference/tool-capabilities.md` | Maps capability language to tool-specific APIs |
+| `scripts/check-workflows.sh` | CI script validating workflow structure |
 | `install.sh` | Setup script for installing into projects |

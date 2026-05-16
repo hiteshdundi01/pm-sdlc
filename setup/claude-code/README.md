@@ -18,8 +18,11 @@ cd /path/to/your/project
 # Create directories
 mkdir -p .claude/commands .claude/reference
 
-# Copy workflows (adjust source path)
-cp /path/to/pm-sdlc/workflows/*.md .claude/commands/
+# Copy workflows (exclude the README)
+for f in /path/to/pm-sdlc/workflows/*.md; do
+  [ "$(basename "$f")" = "README.md" ] && continue
+  cp "$f" .claude/commands/
+done
 
 # Copy reference documents
 cp /path/to/pm-sdlc/reference/*.md .claude/reference/

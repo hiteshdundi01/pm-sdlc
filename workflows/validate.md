@@ -72,6 +72,21 @@ Read `package.json` scripts to find the actual commands:
 | Format check | `ruff format --check .` or `black --check .` |
 | Tests | `pytest` |
 
+#### For Markdown / Documentation projects:
+
+Detected by: no `package.json`/`Cargo.toml`/`pyproject.toml`, but has `.markdownlint.json` or `*.md` files as primary content.
+
+| Check | Command |
+|-------|---------|
+| Lint | `npx markdownlint-cli2 '**/*.md'` (if `.markdownlint.json` exists) |
+| Link check | `npx lychee '**/*.md'` (if available) |
+| Shell syntax | `bash -n *.sh scripts/*.sh` (for any `.sh` files) |
+| Install test | `bash install.sh /tmp/test-project --tool all` (if `install.sh` exists) |
+
+#### For other / mixed projects:
+
+Check for `Makefile`, `justfile`, or CI configuration (`.github/workflows/`) to discover available validation commands. If a `Makefile` exists, try `make check`, `make test`, `make lint`. If a `justfile` exists, try `just check`, `just test`.
+
 ### Phase 2: EXECUTE — Run Each Check
 
 Run checks in this order (fastest feedback first):

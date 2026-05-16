@@ -18,8 +18,11 @@ cd /path/to/your/project
 # Create directories
 mkdir -p .agents/workflows .agents/reference
 
-# Copy workflows
-cp /path/to/pm-sdlc/workflows/*.md .agents/workflows/
+# Copy workflows (exclude the README)
+for f in /path/to/pm-sdlc/workflows/*.md; do
+  [ "$(basename "$f")" = "README.md" ] && continue
+  cp "$f" .agents/workflows/
+done
 
 # Copy reference docs
 cp /path/to/pm-sdlc/reference/*.md .agents/reference/

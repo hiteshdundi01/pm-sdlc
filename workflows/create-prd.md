@@ -12,6 +12,13 @@ Generate a comprehensive Product Requirements Document (PRD) based on the curren
 
 **Output file name**: $ARGUMENTS (default filename: `PRD.md`)
 
+## When to use this skill
+
+- The user asks to create, generate, or write a PRD
+- The user wants to document product requirements from a conversation
+- After an `ideate` session, to formalize the selected direction
+- When the user says "write a PRD", "create requirements", or "document the spec"
+
 ## Output File
 
 Write the PRD to the input filename. Save it in `.agents/PRDs/` directory.
@@ -174,7 +181,7 @@ After creating the PRD:
 ### Recommended Next Steps
 1. Review and refine the PRD with stakeholders
 2. Validate assumptions with target users
-3. Create implementation plan: `/plan {prd-path}`
+3. Create implementation plan: `plan-feature {prd-path}`
 4. Begin Phase 1 implementation
 ```
 
@@ -188,3 +195,10 @@ After creating the PRD:
 - **Length:** Comprehensive but scannable
 - For highly technical products, emphasize architecture and technical stack
 - For user-facing products, emphasize user stories and experience
+
+## Absolute Constraints
+
+1. **NEVER generate a PRD without extracting context first** — ask clarifying questions if critical information is missing.
+2. **NEVER assume technology choices** without justification from the conversation or project context.
+3. **NEVER skip validation** — all required sections must be present, user stories must have benefits, scope must be realistic.
+4. **ALWAYS save to `.agents/PRDs/`** — PRD artifacts live in the project's runtime directory.

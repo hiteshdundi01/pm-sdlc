@@ -74,8 +74,11 @@ The install script will ask which tool you use and set up the right directory st
 # From your project root:
 mkdir -p .claude/commands .claude/reference
 
-# Copy workflows
-cp /path/to/pm-sdlc/workflows/*.md .claude/commands/
+# Copy workflows (exclude the README)
+for f in /path/to/pm-sdlc/workflows/*.md; do
+  [ "$(basename "$f")" = "README.md" ] && continue
+  cp "$f" .claude/commands/
+done
 
 # Copy reference docs
 cp /path/to/pm-sdlc/reference/*.md .claude/reference/
@@ -120,8 +123,11 @@ echo '.agents/' >> .gitignore
 # From your project root:
 mkdir -p .agents/workflows .agents/reference
 
-# Copy workflows
-cp /path/to/pm-sdlc/workflows/*.md .agents/workflows/
+# Copy workflows (exclude the README)
+for f in /path/to/pm-sdlc/workflows/*.md; do
+  [ "$(basename "$f")" = "README.md" ] && continue
+  cp "$f" .agents/workflows/
+done
 
 # Copy reference docs  
 cp /path/to/pm-sdlc/reference/*.md .agents/reference/
@@ -192,6 +198,7 @@ Workflows load these at runtime for domain-specific knowledge:
 | **refinement-criteria.md** | Evaluation rubric: User Value (painkiller vs vitamin), Feasibility, Differentiation + Assumption Audit framework |
 | **review-standards.md** | 5-axis review (Correctness, Readability, Architecture, Security, Performance) + severity conventions + rationalization anti-patterns |
 | **examples.md** | Real ideation session examples with analysis of what made them effective |
+| **tool-capabilities.md** | Maps capability language to Claude Code, Antigravity, and Codex tool APIs |
 
 ## Jira Integration
 
@@ -242,7 +249,8 @@ pm-sdlc/
 │   ├── frameworks.md
 │   ├── refinement-criteria.md
 │   ├── review-standards.md
-│   └── examples.md
+│   ├── examples.md
+│   └── tool-capabilities.md
 ├── examples/               # Real-world workflow output examples
 ├── docs/                   # Extended documentation
 │   ├── workflow-guide.md
@@ -252,7 +260,9 @@ pm-sdlc/
 │   ├── claude-code/
 │   ├── antigravity/
 │   └── codex/
-├── .github/workflows/      # CI: markdown lint, link check, install test
+├── .github/workflows/      # CI: markdown lint, link check, install test, workflow check
+├── scripts/                # CI scripts
+│   └── check-workflows.sh  # Validates workflow structure and tool-agnostic compliance
 ├── install.sh              # One-command setup for any project
 ├── AGENTS.md               # For Codex/generic AI agents
 ├── CLAUDE.md               # For Claude Code (project rules)

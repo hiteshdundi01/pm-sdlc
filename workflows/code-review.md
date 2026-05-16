@@ -8,6 +8,13 @@ argument-hint: <pr-number|file|folder|scope> [--plan <path-to-plan>]
 
 **Input**: $ARGUMENTS
 
+## When to use this skill
+
+- The user asks to review a PR, file, folder, or set of changes
+- Before merging code into a shared branch
+- After `implement-feature` produces a PR
+- When the user says "review", "code review", or "check this PR"
+
 ## Your Mission
 
 Perform a thorough code review:
@@ -82,7 +89,8 @@ gh pr view {NUMBER} --json commits --jq '.commits[] | {oid: .oid, message: .mess
 
 **For file/folder:**
 ```bash
-find {path} -name "*.ts" -o -name "*.tsx" | grep -v node_modules
+# List files in the target path — adapt the extensions to the project's language
+find {path} -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" -o -name "*.py" -o -name "*.rs" -o -name "*.go" -o -name "*.md" \) | grep -v node_modules | grep -v __pycache__
 ```
 
 **For blank (unstaged changes):**
@@ -438,6 +446,17 @@ gh pr review {NUMBER} --comment --body-file "$REPORT_PATH"
 ```
 
 The body file lives under `.agents/reviews/` which is gitignored, so it never enters the PR diff.
+
+---
+
+## Absolute Constraints
+
+1. **NEVER modify the user's working tree** — this workflow is read-only (except `.agents/reviews/` which is gitignored).
+2. **NEVER checkout, switch, or amend branches** in the main working tree.
+3. **NEVER run formatters, linters, or codegen with `--fix`** on the user's files.
+4. **NEVER skip the isolated worktree for PR validation** — validate the PR's code, not the user's branch.
+5. **NEVER leave dangling worktrees** — always clean up on exit, even on error.
+6. **ALWAYS verify the user's working tree is unchanged** at the end (Phase 6).
 
 ---
 

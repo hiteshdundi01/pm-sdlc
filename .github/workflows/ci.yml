@@ -86,4 +86,15 @@ jobs:
         run: |
           grep -q ".agents/plans/" /tmp/test-project/.gitignore
           grep -q ".agents/reviews/" /tmp/test-project/.gitignore
+          grep -q ".agents/retros/" /tmp/test-project/.gitignore
+          grep -q ".agents/rules/" /tmp/test-project/.gitignore
           echo "✅ .gitignore entries verified"
+
+  workflow-check:
+    name: Workflow Structure
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check workflow structure
+        run: ./scripts/check-workflows.sh

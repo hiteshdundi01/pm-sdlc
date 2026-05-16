@@ -134,15 +134,15 @@ Save the stories to `.agents/stories/` directory as a markdown file.
 
 ## Phase 6: JIRA INTEGRATION (when MCP is available)
 
-**Check if the Atlassian MCP server is available.** Look for tools prefixed with `mcp__atlassian__` (e.g., `mcp__atlassian__createJiraIssue`, `mcp__atlassian__searchJiraIssuesUsingJql`). If available, offer to push stories directly to Jira.
+**Check if Jira tools are available in your environment.** The tool names vary by platform — see `reference/tool-capabilities.md` for the mapping. If Jira tools are available, offer to push stories directly to Jira.
 
 ### If Atlassian MCP IS available:
 
-1. **Resolve the Cloud ID** by calling `mcp__atlassian__getAccessibleAtlassianResources` to get the site's `cloudId`. You will need this for every subsequent Jira API call.
+1. **Resolve the Cloud ID** by calling the accessible-resources API to get the site's `cloudId`. You will need this for every subsequent Jira API call.
 
 2. **Validate the project and epic** before creating issues:
-   - Call `mcp__atlassian__getJiraIssue` with the epic key (e.g., `RH-1`) to confirm it exists and is an Epic type
-   - Call `mcp__atlassian__getJiraProjectIssueTypesMetadata` with the project key to confirm available issue types (typically: Story, Task, Bug, Subtask)
+   - Fetch the epic (e.g., `RH-1`) to confirm it exists and is an Epic type
+   - Fetch the project's issue type metadata to confirm available issue types (typically: Story, Task, Bug, Subtask)
 
 3. **Ask the user** before creating issues:
    ```
@@ -151,7 +151,7 @@ Save the stories to `.agents/stories/` directory as a markdown file.
    - Epic: {EPIC_KEY} (or ask if not provided via --epic)
    ```
 
-4. **If user confirms**, create issues in Jira using `mcp__atlassian__createJiraIssue` for each story with these parameters:
+4. **If user confirms**, create a Jira issue for each story with these parameters:
    - `cloudId`: The Cloud ID from step 1
    - `projectKey`: The project key (e.g., `RH`)
    - `issueTypeName`: Map from story category — use exactly `"Story"`, `"Task"`, or `"Bug"` (these are the available types at hierarchy level 0)
@@ -167,15 +167,14 @@ Save the stories to `.agents/stories/` directory as a markdown file.
      }
      ```
 
-5. **Add technical notes** as a comment on each created issue using `mcp__atlassian__addCommentToJiraIssue`:
+5. **Add technical notes** as a comment on each created issue:
    - `cloudId`: The Cloud ID
    - `issueIdOrKey`: The key of the newly created issue (e.g., `RH-5`)
    - `commentBody`: The technical notes content
    - `contentFormat`: `"markdown"`
 
-6. **Create dependency links** between stories using `mcp__atlassian__createIssueLink`:
-   - `cloudId`: The Cloud ID
-   - `type`: `"Blocks"` (use `mcp__atlassian__getIssueLinkTypes` to confirm available link types)
+6. **Create dependency links** between stories:
+   - Link type: `"Blocks"` (fetch available link types first to confirm)
    - `inwardIssue`: The blocking issue key
    - `outwardIssue`: The blocked issue key
 
@@ -200,7 +199,7 @@ Output the stories as markdown only and note:
 ```
 Atlassian MCP is not configured. To push stories to Jira automatically:
 1. Get an API token from https://id.atlassian.com/manage/api-tokens
-2. Configure .mcp.json with Atlassian MCP server credentials
+2. Configure your AI tool's MCP settings with Atlassian MCP server credentials
 3. Re-run this command
 ```
 
@@ -214,3 +213,11 @@ Atlassian MCP is not configured. To push stories to Jira automatically:
 - Include a "definition of done" story if the team doesn't have one
 - Reference the PRD section for each story so reviewers can trace back
 - Use `contentFormat: "markdown"` on all create/comment calls so descriptions render properly in Jira
+
+## Absolute Constraints
+
+1. **NEVER create Jira issues without user confirmation** — always present the list and ask first.
+2. **NEVER skip validation** of the project key and epic before creating issues.
+3. **ALWAYS verify story independence** — each story must be independently deployable and reviewable.
+4. **ALWAYS map every PRD requirement** to at least one story — no requirement should be silently dropped.
+5. **Use capability language for Jira operations** — see `reference/tool-capabilities.md` for tool-specific API names.
