@@ -63,6 +63,30 @@ These are standard CLI tools available in all environments:
 | View PR metadata | `gh pr view {number} --json ...` |
 | Create a PR | `gh pr create` |
 
+## Executor Dispatch
+
+Used by `ship-feature`. The orchestrator dispatches an implementation work order to a headless executor agent running as a shell command. Workflows say "dispatch the work order to the executor"; this table resolves the command.
+
+| Capability | Codex CLI | Claude Code (as executor) |
+|-----------|-----------|---------------------------|
+| Check availability | `codex --version` | `claude --version` |
+| Dispatch work order | `codex exec --sandbox workspace-write --json "<work order>"` | `claude -p "<work order>" --permission-mode acceptEdits` |
+| Select model | `-m <model>` (e.g., `-m gpt-5-codex`) | `--model <model>` |
+| Parse progress | `--json` emits JSONL events on stdout (commands run, files changed, agent messages) | `--output-format stream-json` emits JSONL events |
+| Detect completion | Process exit; nonzero exit = failed run | Process exit; nonzero exit = failed run |
+
+**Sandbox rules:**
+
+- `workspace-write` (Codex) or default permissions (Claude Code) is the ceiling for dispatched work.
+- Never dispatch with `--sandbox danger-full-access`, `--dangerously-skip-permissions`, or equivalent.
+- The executor works only inside the project directory on the branch named in the work order.
+
+**Model selection:** any model the executor CLI exposes is valid — the orchestrator passes the user's `--model` value through unchanged. Verify unfamiliar model names against the CLI's documentation rather than guessing.
+
+**Work order delivery:** pass the work order as the command's prompt argument. For long work orders, write the text to a temp file and pipe it (e.g., `codex exec --sandbox workspace-write "$(cat /tmp/work-order.txt)"`).
+
+**Timeouts:** wrap dispatch in a timeout appropriate to plan size (e.g., `timeout 30m codex exec ...`). A hung executor is a failed dispatch, not a reason to wait indefinitely.
+
 ## Detecting Available Capabilities
 
 Workflows should not assume any specific tools are available. Instead:

@@ -12,6 +12,8 @@ ideate → create-prd → create-stories → prime-for-feature
 
 `create-global-rules` is standalone — use it once per project.
 
+`ship-feature` orchestrates `prime-for-feature` through `code-review` as one run: the orchestrating agent plans and verifies, and dispatches `implement-feature` to a headless executor agent. Two human gates: plan approval and ship decision.
+
 ## Workflow Descriptions
 
 | Workflow | Input | Output | Next Step |
@@ -27,6 +29,7 @@ ideate → create-prd → create-stories → prime-for-feature
 | **code-review** | PR number, file, or folder | `.agents/reviews/*.md` | `retrospective` |
 | **retrospective** | Feature name or `--sprint` | `.agents/retros/*.md` + convention updates | Next feature |
 | **create-global-rules** | Codebase | `AGENTS.md` at project root | — |
+| **ship-feature** | Story file, Jira key, or feature description | Orchestrated run: plan + critique + dispatched implementation + independent verification | `retrospective` |
 
 ## Reference Documents
 

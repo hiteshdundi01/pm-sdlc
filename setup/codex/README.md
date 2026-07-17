@@ -73,6 +73,15 @@ When a workflow says to load a reference document, point Codex to `.agents/refer
 Load .agents/reference/review-standards.md and use it for the code review.
 ```
 
+## Acting as the Executor for ship-feature
+
+When another tool runs the `ship-feature` orchestrator, Codex is the default executor: the orchestrator shells out to `codex exec` with a work order pointing at `.agents/workflows/implement-feature.md` and an approved plan. No extra setup beyond this page — the requirements are:
+
+- Codex CLI installed and authenticated
+- pm-sdlc installed in the target project (this provides `AGENTS.md` and `.agents/workflows/`)
+
+The work order scopes the run: implement the plan on a feature branch, write the report to `.agents/reports/`, skip Jira, don't archive the plan. The orchestrator independently re-validates and reviews the result.
+
 ## Customizing AGENTS.md
 
 The installed `AGENTS.md` is a starting point. Customize it to:

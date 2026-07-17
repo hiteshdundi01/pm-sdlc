@@ -291,6 +291,27 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 
 ---
 
+### 12. ship-feature (orchestrator)
+
+**Purpose**: Run the planning-to-shipped chain as one session, with implementation dispatched to a separate executor agent.
+
+**Input**: Story file, Jira key, or feature description + optional `--executor` and `--model` flags
+
+**Output**: Verified feature branch + every chain artifact (plan, plan critique, implementation report, validation results, code review)
+
+**Key behaviors**:
+- Executes `prime-for-feature` → `plan-feature` → `critique-plan` inline, with an automatic revise loop (max 2 cycles)
+- Dispatches `implement-feature` to a headless executor CLI as a scoped work order
+- Re-runs `validate` and `code-review --plan` itself — the executor's report is treated as claims, not evidence
+- Bounded fix loop (max 2 rounds) feeding Critical/High review findings back to the executor
+- Two human gates: plan approval before dispatch, ship decision after verification
+
+**Feeds into**: `retrospective`
+
+**Why a separate executor**: The agent that wrote the code never reviews it. Cross-agent review removes self-review bias by construction.
+
+---
+
 ## Common Workflows
 
 ### "I have an idea" → Ship it
@@ -306,6 +327,13 @@ ideate → create-prd → create-stories → prime-for-feature
 ```
 prime-for-feature → plan-feature → critique-plan
 → implement-feature → validate → code-review
+```
+
+### "Ship this story, orchestrated"
+
+```
+ship-feature .agents/stories/{story}.md --executor codex
+(runs prime → plan ⇄ critique → dispatch → validate → code-review with two human gates)
 ```
 
 ### "Review this PR"

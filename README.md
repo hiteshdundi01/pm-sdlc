@@ -7,7 +7,7 @@
 <img src="docs/assets/pm-sdlc-hero.svg" alt="pm-sdlc lifecycle overview" width="100%">
 
 <p>
-  <kbd>11 workflows</kbd>
+  <kbd>12 workflows</kbd>
   <kbd>markdown only</kbd>
   <kbd>zero runtime dependencies</kbd>
   <kbd>Claude Code</kbd>
@@ -192,6 +192,10 @@ flowchart LR
 
 `create-global-rules` runs standalone to bootstrap project conventions from an existing codebase.
 
+### Multi-Model Orchestration
+
+`ship-feature` runs the planning-to-shipped chain as one session with a division of labor: the reasoning agent (e.g., Claude) primes, plans, critiques, and reviews, while a headless executor agent (e.g., Codex CLI) implements the approved plan. Because the reviewer never reviews its own code, cross-agent review is built in — and the orchestrator re-runs validation itself instead of trusting the executor's report. Dispatch commands are mapped per tool in [`tool-capabilities.md`](reference/tool-capabilities.md). Two human gates remain: plan approval before dispatch, ship decision after verification.
+
 ## Workflow Command Center
 
 | Phase | Workflow | Produces | Built-In Guardrail |
@@ -207,6 +211,7 @@ flowchart LR
 | Execute | `code-review` | `.agents/reviews/*.md` | 5-axis read-only review from an isolated git worktree |
 | Learn | `retrospective` | `.agents/retros/*.md` + convention updates | Requires at least one concrete lesson or convention update |
 | Bootstrap | `create-global-rules` | `AGENTS.md` | Discover-first rules from actual code, not assumptions |
+| Orchestrate | `ship-feature` | Verified feature branch + all chain artifacts | Two human gates; executor output re-verified independently, never trusted |
 
 ## What Makes This Different
 
@@ -291,7 +296,7 @@ The [`examples/`](examples/) directory contains realistic workflow outputs:
 
 ```text
 pm-sdlc/
-├── workflows/              # 11 canonical workflow definitions
+├── workflows/              # 12 canonical workflow definitions
 ├── reference/              # Supporting docs loaded by workflows
 ├── setup/                  # Per-tool installation guides
 ├── examples/               # Real workflow output examples

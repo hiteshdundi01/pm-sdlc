@@ -46,6 +46,7 @@ Workflows are available as slash commands in Claude Code:
 | `/implement-feature` | Execute a plan |
 | `/code-review` | Review a PR or code scope |
 | `/create-global-rules` | Generate AGENTS.md |
+| `/ship-feature` | Orchestrate plan → implement → verify with a dispatched executor |
 
 ## Jira Integration
 
@@ -54,6 +55,22 @@ To enable Jira features in `create-stories`, `prime-for-feature`, and `implement
 1. Get an API token from https://id.atlassian.com/manage/api-tokens
 2. Configure the Atlassian MCP server in your Claude Code settings
 3. Workflows will automatically detect and use the MCP connection
+
+## Multi-Model Execution (ship-feature)
+
+`/ship-feature` uses Claude Code as the reasoning agent and dispatches implementation to a headless executor CLI. To enable the default Codex executor:
+
+1. Install the Codex CLI and authenticate it (`codex login`)
+2. Install pm-sdlc into the project with `--tool all` so the executor finds `AGENTS.md` and `.agents/workflows/implement-feature.md`
+3. Allow the `codex` command in your Claude Code permission settings (the dispatch runs through the Bash tool)
+
+Then:
+
+```
+/ship-feature .agents/stories/my-story.md --executor codex --model <model>
+```
+
+`--model` is passed through to the executor CLI unchanged — use any model your Codex account exposes. Dispatch command details live in `.claude/reference/tool-capabilities.md` (Executor Dispatch section).
 
 ## Reference Document Loading
 
