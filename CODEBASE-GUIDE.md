@@ -22,6 +22,8 @@ ideate → create-prd → create-stories
 
 **create-global-rules** is a standalone workflow used once per project to bootstrap conventions.
 
+**ship-feature** is an orchestrator: it executes `prime-for-feature` through `code-review` as one session, dispatching `implement-feature` to a headless executor agent and independently re-verifying the result. Two human gates (plan approval, ship decision).
+
 ### Workflow Anatomy
 
 Every workflow follows the same internal structure:
@@ -51,6 +53,7 @@ Workflows load reference documents at runtime for domain-specific knowledge:
 | `refinement-criteria.md` | `ideate` | Evaluation rubric for stress-testing ideas |
 | `review-standards.md` | `code-review` | 5-axis review framework and severity conventions |
 | `examples.md` | `ideate` | Example ideation session outputs |
+| `tool-capabilities.md` | `ship-feature` | Executor dispatch commands, Jira/file API mappings per tool |
 
 ### The `.agents/` Directory
 

@@ -33,6 +33,9 @@ cp /path/to/pm-sdlc/reference/examples.md "$SKILL_DIR/ideate/resources/"
 mkdir -p "$SKILL_DIR/code-review/resources"
 cp /path/to/pm-sdlc/reference/review-standards.md "$SKILL_DIR/code-review/resources/"
 
+mkdir -p "$SKILL_DIR/ship-feature/resources"
+cp /path/to/pm-sdlc/reference/tool-capabilities.md "$SKILL_DIR/ship-feature/resources/"
+
 # Set up gitignore for runtime artifacts
 echo '.agents/' >> .gitignore
 ```

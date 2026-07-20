@@ -134,6 +134,7 @@ install_claude_code() {
     echo -e "  ${CYAN}/create-global-rules${NC} — Generate AGENTS.md"
     echo -e "  ${CYAN}/validate${NC}           — Run quality checks"
     echo -e "  ${CYAN}/retrospective${NC}      — Capture lessons learned"
+    echo -e "  ${CYAN}/ship-feature${NC}       — Orchestrate plan → implement → verify via executor"
 }
 
 # Install for Antigravity (Gemini)
@@ -169,6 +170,10 @@ install_antigravity() {
             code-review)
                 mkdir -p "$skill_dir/resources"
                 cp "$REFERENCE_DIR/review-standards.md" "$skill_dir/resources/"
+                ;;
+            ship-feature)
+                mkdir -p "$skill_dir/resources"
+                cp "$REFERENCE_DIR/tool-capabilities.md" "$skill_dir/resources/"
                 ;;
         esac
 
@@ -327,6 +332,9 @@ main() {
     echo -e "  ideate → create-prd → create-stories → prime-for-feature"
     echo -e "  → plan-feature ⇄ critique-plan → implement-feature → validate"
     echo -e "  → code-review → retrospective"
+    echo ""
+    echo -e "  Or orchestrated: ${CYAN}ship-feature${NC} runs prime → review in one session"
+    echo -e "  with implementation dispatched to a headless executor agent."
     echo ""
 }
 

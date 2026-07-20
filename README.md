@@ -259,7 +259,7 @@ Workflows load focused reference docs only when they need domain-specific guidan
 | [`refinement-criteria.md`](reference/refinement-criteria.md) | `ideate` | Evaluation rubric for user value, feasibility, differentiation, and assumption audits |
 | [`examples.md`](reference/examples.md) | `ideate` | Real ideation examples with analysis of what made them effective |
 | [`review-standards.md`](reference/review-standards.md) | `code-review` | 5-axis review framework, severity conventions, and rationalization anti-patterns |
-| [`tool-capabilities.md`](reference/tool-capabilities.md) | Tool setup and workflow authors | Maps capability language to Claude Code, Antigravity, and Codex APIs |
+| [`tool-capabilities.md`](reference/tool-capabilities.md) | `ship-feature`, tool setup, workflow authors | Maps capability language (including executor dispatch) to Claude Code, Antigravity, and Codex APIs |
 
 ## Jira Integration
 

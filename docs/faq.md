@@ -13,12 +13,13 @@ It's structured prompt engineering with three key differences:
 2. **Quality gates are built in** — workflows define conditions that must be met before proceeding
 3. **Codebase grounding is required** — plans must cite actual code, not invented patterns
 
-### Do I need to use all 11 workflows?
+### Do I need to use all 12 workflows?
 
 No. Use what's relevant:
 - **Quick feature work**: `prime-for-feature` → `plan-feature` → `implement-feature`
 - **PR review**: `code-review` standalone
 - **New project**: `create-global-rules` standalone
+- **Orchestrated run**: `ship-feature` drives planning through review for you, with two approval gates
 - **Full lifecycle**: Use the complete chain
 
 ### Which AI tools are supported?
