@@ -58,7 +58,7 @@ To enable Jira features in `create-stories`, `prime-for-feature`, and `implement
 
 ## Multi-Model Execution (ship-feature)
 
-`/ship-feature` uses Claude Code as the reasoning agent and dispatches implementation to a headless executor CLI. To enable the default Codex executor:
+`/ship-feature` uses Claude Code as the reasoning agent and dispatches both implementation and the post-approval merge to a headless executor CLI. To enable the default Codex executor:
 
 1. Install the Codex CLI and authenticate it (`codex login`)
 2. Install pm-sdlc into the project with `--tool all` so the executor finds `AGENTS.md` and `.agents/workflows/implement-feature.md`

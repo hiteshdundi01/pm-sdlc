@@ -19,7 +19,7 @@ No. Use what's relevant:
 - **Quick feature work**: `prime-for-feature` → `plan-feature` → `implement-feature`
 - **PR review**: `code-review` standalone
 - **New project**: `create-global-rules` standalone
-- **Orchestrated run**: `ship-feature` drives planning through review for you, with two approval gates
+- **Orchestrated run**: `ship-feature` drives planning through merge for you, with two approval gates
 - **Full lifecycle**: Use the complete chain
 
 ### Which AI tools are supported?

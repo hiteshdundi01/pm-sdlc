@@ -82,6 +82,8 @@ When another tool runs the `ship-feature` orchestrator, Codex is the default exe
 
 The work order scopes the run: implement the plan on a feature branch, write the report to `.agents/reports/`, skip Jira, don't archive the plan. The orchestrator independently re-validates and reviews the result.
 
+Codex is also the **merge owner**: after the human approves shipping, the orchestrator dispatches a merge order — Codex re-runs validation, merges the feature branch into the default branch, and reports the merge SHA. Merge orders never edit code; on conflict or failure Codex aborts and the orchestrator fixes.
+
 ## Customizing AGENTS.md
 
 The installed `AGENTS.md` is a starting point. Customize it to:

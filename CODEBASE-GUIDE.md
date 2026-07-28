@@ -22,7 +22,7 @@ ideate → create-prd → create-stories
 
 **create-global-rules** is a standalone workflow used once per project to bootstrap conventions.
 
-**ship-feature** is an orchestrator: it executes `prime-for-feature` through `code-review` as one session, dispatching `implement-feature` to a headless executor agent and independently re-verifying the result. Two human gates (plan approval, ship decision).
+**ship-feature** is an orchestrator: it executes `prime-for-feature` through `code-review` as one session, dispatching `implement-feature` to a headless executor agent and independently re-verifying the result. The orchestrator applies review fixes; the executor re-validates and executes the merge after the human's ship decision — no agent lands its own last change. Two human gates (plan approval, ship decision).
 
 ### Workflow Anatomy
 

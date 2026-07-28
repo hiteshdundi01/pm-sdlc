@@ -194,7 +194,7 @@ flowchart LR
 
 ### Multi-Model Orchestration
 
-`ship-feature` runs the planning-to-shipped chain as one session with a division of labor: the reasoning agent (e.g., Claude) primes, plans, critiques, and reviews, while a headless executor agent (e.g., Codex CLI) implements the approved plan. Because the reviewer never reviews its own code, cross-agent review is built in — and the orchestrator re-runs validation itself instead of trusting the executor's report. Dispatch commands are mapped per tool in [`tool-capabilities.md`](reference/tool-capabilities.md). Two human gates remain: plan approval before dispatch, ship decision after verification.
+`ship-feature` runs the planning-to-shipped chain as one session with a division of labor: the reasoning agent (e.g., Claude) primes, plans, critiques, reviews, and applies review fixes, while a headless executor agent (e.g., Codex CLI) implements the approved plan and — after the human's ship decision — executes the merge. No agent lands its own last change: the orchestrator's fixes are re-validated by the executor before merging, and the orchestrator confirms the merge landed. Dispatch commands are mapped per tool in [`tool-capabilities.md`](reference/tool-capabilities.md). Two human gates remain: plan approval before dispatch, ship decision before merge.
 
 ## Workflow Command Center
 

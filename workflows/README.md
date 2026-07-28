@@ -12,7 +12,7 @@ ideate → create-prd → create-stories → prime-for-feature
 
 `create-global-rules` is standalone — use it once per project.
 
-`ship-feature` orchestrates `prime-for-feature` through `code-review` as one run: the orchestrating agent plans and verifies, and dispatches `implement-feature` to a headless executor agent. Two human gates: plan approval and ship decision.
+`ship-feature` orchestrates `prime-for-feature` through `code-review` as one run: the orchestrating agent plans, verifies, and applies review fixes; a headless executor agent implements the plan and executes the merge after the ship decision. Two human gates: plan approval and ship decision.
 
 ## Workflow Descriptions
 

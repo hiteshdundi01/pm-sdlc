@@ -85,6 +85,8 @@ Used by `ship-feature`. The orchestrator dispatches an implementation work order
 
 **Work order delivery:** pass the work order as the command's prompt argument. For long work orders, write the text to a temp file and pipe it (e.g., `codex exec --sandbox workspace-write "$(cat /tmp/work-order.txt)"`).
 
+**Merge orders:** merge dispatch uses the same command shape as implementation dispatch. If the merge must push to a remote, enable network access for that run only — Codex sandboxes block network by default in `workspace-write` (config key `sandbox_workspace_write.network_access`, settable per-run with `-c`). Local-only repositories need no network. The merge order forbids code edits; the executor aborts on conflicts.
+
 **Timeouts:** wrap dispatch in a timeout appropriate to plan size (e.g., `timeout 30m codex exec ...`). A hung executor is a failed dispatch, not a reason to wait indefinitely.
 
 ## Detecting Available Capabilities

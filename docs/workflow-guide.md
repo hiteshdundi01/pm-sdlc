@@ -303,12 +303,13 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 - Executes `prime-for-feature` → `plan-feature` → `critique-plan` inline, with an automatic revise loop (max 2 cycles)
 - Dispatches `implement-feature` to a headless executor CLI as a scoped work order
 - Re-runs `validate` and `code-review --plan` itself — the executor's report is treated as claims, not evidence
-- Bounded fix loop (max 2 rounds) feeding Critical/High review findings back to the executor
-- Two human gates: plan approval before dispatch, ship decision after verification
+- Bounded fix passes (max 2): the orchestrator applies review fixes directly, each traceable to a finding
+- Merge ownership: after the ship decision, the executor re-validates and executes the merge; the orchestrator confirms it landed
+- Two human gates: plan approval before dispatch, ship decision before merge
 
 **Feeds into**: `retrospective`
 
-**Why a separate executor**: The agent that wrote the code never reviews it. Cross-agent review removes self-review bias by construction.
+**Why a separate executor**: The agent that wrote the code never reviews it, and no agent merges its own last change. Cross-agent review and cross-agent merge remove self-certification by construction.
 
 ---
 
