@@ -7,7 +7,7 @@
 <img src="docs/assets/pm-sdlc-hero.svg" alt="pm-sdlc lifecycle overview" width="100%">
 
 <p>
-  <kbd>12 workflows</kbd>
+  <kbd>13 workflows</kbd>
   <kbd>markdown only</kbd>
   <kbd>zero runtime dependencies</kbd>
   <kbd>Claude Code</kbd>
@@ -146,10 +146,12 @@ Use the workflows in sequence when you want a complete development lifecycle. Ea
 ```mermaid
 flowchart LR
     subgraph discovery["Discovery"]
+        bigideate["big-ideate<br/>multi-session map"]
         ideate["ideate"]
         prd["create-prd"]
         stories["create-stories"]
         ideate --> prd --> stories
+        bigideate --> prd
     end
 
     subgraph planning["Planning"]
@@ -183,7 +185,7 @@ flowchart LR
     classDef learn fill:#fce7f3,stroke:#db2777,color:#500724
     classDef standalone fill:#e5e7eb,stroke:#64748b,color:#111827
 
-    class ideate,prd,stories discover
+    class ideate,bigideate,prd,stories discover
     class prime,plan,critique planClass
     class implement,validate,review execute
     class retro learn
@@ -191,6 +193,8 @@ flowchart LR
 ```
 
 `create-global-rules` runs standalone to bootstrap project conventions from an existing codebase.
+
+`big-ideate` is the multi-session entry into Discovery: when an initiative is too large and foggy for one `ideate` session, it charts the open questions as decision tickets on the issue tracker and resolves them one per session until the way is clear — then hands off to `create-prd`.
 
 ### Multi-Model Orchestration
 
@@ -200,6 +204,7 @@ flowchart LR
 
 | Phase | Workflow | Produces | Built-In Guardrail |
 | ----- | -------- | -------- | ------------------ |
+| Discover | `big-ideate` | Issue-tracker decision map (or `.agents/maps/*`) | One decision per session, plan-don't-do, HITL tickets never self-answered |
 | Discover | `ideate` | `.agents/ideas/*.idea.md` | Divergent/convergent thinking, SCAMPER, HMW, JTBD, explicit "Not Doing" list |
 | Discover | `create-prd` | `.agents/PRDs/*.prd.md` | 15-section product spec with concrete implementation phases |
 | Discover | `create-stories` | `.agents/stories/*.md` and optional Jira issues | Human confirmation before creating Jira work |
@@ -259,7 +264,7 @@ Workflows load focused reference docs only when they need domain-specific guidan
 | [`refinement-criteria.md`](reference/refinement-criteria.md) | `ideate` | Evaluation rubric for user value, feasibility, differentiation, and assumption audits |
 | [`examples.md`](reference/examples.md) | `ideate` | Real ideation examples with analysis of what made them effective |
 | [`review-standards.md`](reference/review-standards.md) | `code-review` | 5-axis review framework, severity conventions, and rationalization anti-patterns |
-| [`tool-capabilities.md`](reference/tool-capabilities.md) | `ship-feature`, tool setup, workflow authors | Maps capability language (including executor dispatch) to Claude Code, Antigravity, and Codex APIs |
+| [`tool-capabilities.md`](reference/tool-capabilities.md) | `ship-feature`, `big-ideate`, tool setup, workflow authors | Maps capability language (including executor dispatch and wayfinding operations) to Claude Code, Antigravity, and Codex APIs |
 
 ## Jira Integration
 
@@ -267,6 +272,7 @@ Jira-aware workflows use Atlassian MCP when it is configured:
 
 | Workflow | Jira Behavior |
 | -------- | ------------- |
+| `big-ideate` | Creates the decision map and its tickets as issues, wires Blocks links, queries the frontier by JQL, and records resolutions as comments |
 | `create-stories` | Creates issues, sets priority and labels, links to epics, and adds dependency links after user confirmation |
 | `prime-for-feature` | Fetches issues and reconciles acceptance criteria against PRD context |
 | `implement-feature` | Transitions issues and adds implementation comments |
@@ -296,7 +302,7 @@ The [`examples/`](examples/) directory contains realistic workflow outputs:
 
 ```text
 pm-sdlc/
-├── workflows/              # 12 canonical workflow definitions
+├── workflows/              # 13 canonical workflow definitions
 ├── reference/              # Supporting docs loaded by workflows
 ├── setup/                  # Per-tool installation guides
 ├── examples/               # Real workflow output examples

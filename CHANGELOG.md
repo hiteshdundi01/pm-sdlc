@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `big-ideate` — multi-session discovery workflow adapted from the wayfinder pattern: charts an initiative too large for one session as a map of typed decision tickets (research / grilling / prototype / task) on the issue tracker, with fog-of-war scoping, native Blocks-link frontiers, one-decision-per-session resolution, and handoff to `create-prd` when the way is clear
+- **Wayfinding Operations** section in `reference/tool-capabilities.md` — maps big-ideate's map/ticket capabilities to Atlassian MCP tools (create, link, JQL frontier queries, claim-by-assignee, resolution comments) and a local `.agents/maps/` markdown fallback
+
 - `ship-feature` — orchestrator workflow that runs prime → plan → critique → implement → validate → review as one session. The reasoning agent plans and independently verifies; implementation is dispatched to a headless executor agent (e.g., Codex CLI) with bounded critique/fix loops and two human gates (plan approval, ship decision)
 - **Executor Dispatch** section in `reference/tool-capabilities.md` — maps the dispatch capability to Codex CLI (`codex exec`) and Claude Code (`claude -p`) headless commands, with sandbox rules, model selection, and timeout guidance
 

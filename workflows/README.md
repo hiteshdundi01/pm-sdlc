@@ -12,12 +12,15 @@ ideate → create-prd → create-stories → prime-for-feature
 
 `create-global-rules` is standalone — use it once per project.
 
+`big-ideate` replaces `ideate → create-prd` at the head of the chain when an initiative is too large for one session: it charts a decision map on the issue tracker, resolves one decision per session, and hands off to `create-prd` → `create-stories` once the way is clear.
+
 `ship-feature` orchestrates `prime-for-feature` through `code-review` as one run: the orchestrating agent plans, verifies, and applies review fixes; a headless executor agent implements the plan and executes the merge after the ship decision. Two human gates: plan approval and ship decision.
 
 ## Workflow Descriptions
 
 | Workflow | Input | Output | Next Step |
 |----------|-------|--------|-----------|
+| **big-ideate** | Oversized loose idea, or a map key + optional ticket | Issue-tracker decision map (fallback: `.agents/maps/*`) + resolved decisions | `create-prd` when the map completes |
 | **ideate** | Raw idea or topic | `.agents/ideas/*.idea.md` | `create-prd` |
 | **create-prd** | Conversation or idea file | `.agents/PRDs/*.prd.md` | `create-stories` |
 | **create-stories** | PRD file | `.agents/stories/*.md` + Jira issues | `prime-for-feature` |
@@ -37,6 +40,8 @@ Workflows load reference documents at runtime:
 
 - **ideate** loads: `frameworks.md`, `refinement-criteria.md`, `examples.md`
 - **code-review** loads: `review-standards.md`
+- **big-ideate** loads: `tool-capabilities.md` (Wayfinding Operations)
+- **ship-feature** loads: `tool-capabilities.md` (Executor Dispatch)
 
 These live in the `reference/` directory (sibling to this one in the canonical layout).
 

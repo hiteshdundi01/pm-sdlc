@@ -313,6 +313,29 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 
 ---
 
+### 13. big-ideate (multi-session discovery)
+
+**Purpose**: Run Discovery across many sessions when an initiative is too large and foggy for one `ideate` conversation.
+
+**Input**: A loose oversized idea (charting mode), or a map key/URL plus an optional ticket name (working mode)
+
+**Output**: A decision map on the issue tracker — one parent issue labelled `big-ideate:map` with decision tickets as children (fallback: `.agents/maps/{name}/`). The finished map's "Decisions so far" index feeds `create-prd`.
+
+**Key behaviors**:
+- Names the **destination** first (usually "a PRD ready for create-stories") — it fixes the scope of everything else
+- Charts breadth-first: sharp questions become tickets, dim ones stay in a "Not yet specified" fog section
+- Tickets are typed: `research` (agent-driven), `grilling` and `prototype` (human-in-the-loop), `task` (unblocking work)
+- Resolves exactly **one decision per session** (research excepted); claims tickets by assignment so parallel sessions don't collide
+- Blocking uses native Jira Blocks links, so the frontier of takeable tickets is visible in the tracker UI
+- Refuses to build a map when one session would do — no fog, no map
+- Plans, never executes: the map produces decisions; the rest of the chain produces the deliverable
+
+**Feeds into**: `create-prd` → `create-stories` once the frontier is empty and the fog is clear
+
+**Why this exists**: `ideate` assumes one session can hold the whole conversation. Large initiatives can't list their open questions up front, let alone answer them — the map makes that incompleteness explicit and works it down decision by decision, across days or weeks, with a shared artifact any session can pick up.
+
+---
+
 ## Common Workflows
 
 ### "I have an idea" → Ship it
@@ -321,6 +344,13 @@ This guide explains how pm-sdlc workflows connect, what each one expects as inpu
 ideate → create-prd → create-stories → prime-for-feature
 → plan-feature → critique-plan → implement-feature → validate → code-review
 → retrospective
+```
+
+### "This idea is too big for one session" → Map it
+
+```
+big-ideate (chart) → big-ideate (one decision per session, repeated)
+→ create-prd → create-stories → prime-for-feature → ...
 ```
 
 ### "I have a Jira ticket" → Implement it
